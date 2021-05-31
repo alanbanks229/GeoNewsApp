@@ -1,10 +1,17 @@
-Creating a project on Windows:
+**Getting Started:**
 
-#This may not work
-django-admin startproject mysite
+Run the server... when you're in the parent directory:
 
-#Equivalent command is:
-python -m django startproject mysite
+`python3 manage.py runserver`
 
-#Running a server... when you're in the right directory:
-python3 manage.py runserver
+and then go to wherever your localhost server starts running
+
+(i.e localhost:3000 or http://127.0.0.1:3000/ etc... )
+
+**Creating a Django project on Windows:**
+
+This command may not work on windows
+`django-admin startproject {name_of_your_app}`
+
+Equivalent command for windows is:
+`python -m django startproject {name_of_your_app}`
