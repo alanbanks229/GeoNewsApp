@@ -1,0 +1,31 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GeoNews Web Application</title>
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <script src="{% static 'js/google_map.js' %}"></script>
+</head>
+<body>
+    <p>
+        <a href="{% url 'count_homepage' %}">Count Home Page (Django way) </a>
+        <br/>
+        <a href="count_homepage/">Count Home Page (html way) </a>
+    </p>
+    <h1>GeoNews</h1>
+    <p>Get the news just by clicking :D</p>
+    <!-- Text Input Field -->
+    <div id="location-panel">
+        <input id="address" type="textbox" value="Washington, D.C." />
+        <input id="submit" type="button" value="locate" />
+    </div>
+
+    <!-- Reserved id 'map' for google map to appear-->
+    <div id="map"></div>
+
+    <!-- Runs/Loads code in our app.js file. -->
+</body>
+</html>

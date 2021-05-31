@@ -20,8 +20,9 @@ from . import views
 
 urlpatterns = [
     # if the user inputs the website with no other 
-    path('', views.homepage),
+    path('', views.homepage, name="homepage"),
+    path('count_homepage/', views.count_homepage, name='count_homepage'),
                                           #name= allows us to refer to this in html template
-    path('result_of_count/', views.count, name='count'),
+    path('result_of_count/', views.count, name='count_result'),
     path('admin/', admin.site.urls),
 ]

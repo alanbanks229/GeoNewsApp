@@ -3,10 +3,14 @@ from django.http import HttpResponse
 # this will render our custom templates inside "../html_templates"
 from django.shortcuts import render
 
-
+# main site homepage... with google map
 def homepage(request):
+    return render(request, 'homepage.html')
+
+# Django tutorial Count Homepage.
+def count_homepage(request):
     # return HttpResponse('Hello')
-    return render(request, 'home.html', {'greeting': "Why hello there mah dude"})
+    return render(request, 'count_homepage.html', {'greeting': "Why hello there mah dude"})
 
 
 def count(request):

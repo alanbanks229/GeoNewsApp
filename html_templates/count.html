@@ -1,3 +1,4 @@
+<!-- Sample template to help understand Django html  -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,6 +8,15 @@
     <title>Count Result</title>
 </head>
 <body>
+    <a href="{% url 'homepage' %}">Go Home (Django Way)</a>
+    <br/>
+    <a href="/">Go Home (html way)</a>
+    <br/>
+    <a href="{% url 'count_homepage' %}">Count Home Page (Django way) </a>
+    <br/>
+
+    <!-- Below will not work... since your adding onto html path. -->
+    <!-- <a href="count_homepage/">Count Home Page (html way) </a> -->
     <h1>There are {{ count }} words in your text</h1>
     
     <h1>Your text:</h1>
