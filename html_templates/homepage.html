@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoNews Web Application</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <script src="{% static 'js/google_map.js' %}"></script>
+    <script type="module" src="{% static 'js/google_map.js' %}"></script>
 </head>
 <body>
     <p>
@@ -15,17 +15,28 @@
         <br/>
         <a href="count_homepage/">Count Home Page (html way) </a>
     </p>
-    <h1>GeoNews</h1>
-    <p>Get the news just by clicking :D</p>
-    <!-- Text Input Field -->
-    <div id="location-panel">
-        <input id="address" type="textbox" value="Washington, D.C." />
-        <input id="submit" type="button" value="locate" />
+    <div class="align-center">
+        <h1>GeoNews</h1>
+        <p>Get the news just by clicking :D</p>
+        <!-- Text Input Field -->
+        <div id="location-panel">
+            <label>
+                City, State: 
+            </label>
+            <input id="address" type="textbox" value="Washington, D.C." />
+            <input id="submit" type="button" value="locate" />
+        </div>
+        
+        <!-- Reserved id 'map' for google map to appear-->
+        <div id="map"></div>
+        <div id="floating-panel">
+            <input id="clearMarkers" type="button" value="Hide Markers" />
+            <input id="showMarkers" type="button" value="Show All Markers" />
+            <input id="deleteMarkers" type="button" value="Delete Markers" />
+        </div>
     </div>
 
-    <!-- Reserved id 'map' for google map to appear-->
-    <div id="map"></div>
-
-    <!-- Runs/Loads code in our app.js file. -->
+    <!--DO NOT MOVE THIS SCRIPT TAG ... IT NEEDS TO LOAD LAST-->
+    <script type="module" src="{% static 'js/map_marker.js' %}"></script>
 </body>
 </html>

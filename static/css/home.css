@@ -1,6 +1,26 @@
+#location-panel{
+    text-align: center;
+    margin: auto;
+}
+
 
 #map {
     height: 700px;
     /* 75% of div container */
+    margin: auto;
     width: 75%;
+    padding: 10px;
+}
+
+#floating-panel {
+    padding: 5px;
+    margin: auto;
+    width: 75%;
+    border: black solid 1px;
+    text-align: center;
+}
+
+#deleteMarkers {
+    color: red;
+    font: bolder;
 }
