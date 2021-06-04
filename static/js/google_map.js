@@ -2,7 +2,7 @@ import { locateAndCreateMarkerEvent } from './map_marker.js';
 
 // Create the script tag, set the appropriate attributes
 var script = document.createElement('script');
-var api_key = 'AIzaSyA8sAL9r1Q6e4evB1ixFTTNSZEa7UpjcT0'
+var api_key = 'AIzaSyAJl8cHlF33w5ePQlxpfVxEh34Sow_uhac'
 script.src = "https://maps.googleapis.com/maps/api/js?key="+api_key+"&callback=initMap";
 script.async = true;
 
