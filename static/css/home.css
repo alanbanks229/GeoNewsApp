@@ -3,6 +3,9 @@
     margin: auto;
 }
 
+.align-center{
+    border: orange solid 3px;
+}
 
 #map {
     height: 700px;
