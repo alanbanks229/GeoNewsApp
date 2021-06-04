@@ -1,9 +1,10 @@
 import { locateAndCreateMarkerEvent } from './map_marker.js';
+import {Google_API_Key} from './api_keys.js';
 
 // Create the script tag, set the appropriate attributes
 var script = document.createElement('script');
-var api_key = 'AIzaSyAJl8cHlF33w5ePQlxpfVxEh34Sow_uhac'
-script.src = "https://maps.googleapis.com/maps/api/js?key="+api_key+"&callback=initMap";
+
+script.src = "https://maps.googleapis.com/maps/api/js?key="+Google_API_Key+"&callback=initMap";
 script.async = true;
 
 

@@ -1,17 +1,8 @@
+import {Bing_API_Key} from './api_keys.js'
 
-//Look at X-Search-Location query parameter... instead of hardcoding the string 'Potomac, MD' Bing's news search API can give me local news given coordinates.
-
-// This file is just used for a reference to make the fetch calls I will use in the app
-
-const api = 'a743e8ea9e8749089234756f0681648a';
 const requestHeaders = {
     headers: {
-        'Ocp-Apim-Subscription-Key': api,
-
-        // Below is an optional header X-Search-Location... we may not need this...
-
-        // potomac MD coordinates   re=radius
-        // 'X-Search-Location': {lat: 39.0182, long: 77.2086, re:100}
+        'Ocp-Apim-Subscription-Key': Bing_API_Key,
     },
 };
 
