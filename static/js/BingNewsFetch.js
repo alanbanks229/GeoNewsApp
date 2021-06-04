@@ -28,4 +28,6 @@ function fetchNews(formatted_address){
 
 }
 
+var wut = "wut";
+
 export {fetchNews}
