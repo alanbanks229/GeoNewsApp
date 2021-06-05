@@ -1,4 +1,5 @@
 import {Bing_API_Key} from './api_keys.js'
+import {parseNewsJSON} from './jsonHandling.js'
 
 const requestHeaders = {
     headers: {
@@ -15,7 +16,10 @@ function fetchNews(formatted_address){
     let target_url = 'https://api.bing.microsoft.com/v7.0/news/search?q=' + formatted_address;
     fetch(target_url, requestHeaders)
         .then((response) => response.json())
-        .then((newsJSON) => console.log(newsJSON))
+        .then(newsJSON => {
+            console.log(newsJSON);
+            parseNewsJSON(newsJSON);
+        })
 
 }
 
