@@ -10,7 +10,6 @@ script.async = true;
 
 // These variables should eventually be fetched from a database? If we're going for that functionality.
 let map_object;
-// let user_markers = []
 
 window.initMap = function() {
   
