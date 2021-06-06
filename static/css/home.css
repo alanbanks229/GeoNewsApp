@@ -3,16 +3,32 @@
     margin: auto;
 }
 
-.align-center{
-    border: orange solid 3px;
+#GeoNews-Title{
+    text-align: center;
+    font-size: 48px;
 }
 
+#GeoNews-Title + p {
+    text-align: center;
+}
+body{
+    /* background-image: url(https://i.imgur.com/SvnuN4M.png); */
+    background-image: url('../images/long_island.jpg');
+    background-size: cover;
+    /* height: 100vh; */
+}
+
+.map-container{
+    border: orange solid 3px;
+    background-color: rgba(255, 255, 255, 0.75) ;
+}
 #map {
     height: 700px;
     /* 75% of div container */
     margin: auto;
     width: 75%;
     padding: 10px;
+    opacity: 1!important;
 }
 
 #floating-panel {
