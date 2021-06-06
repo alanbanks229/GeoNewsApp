@@ -21,12 +21,16 @@ function fetchNews(formatted_address){
         .then((newsJSON) => {
             console.log(newsJSON)
             articles_json = newsJSON;
-            renderNewsCard(newsJSON);
+            renderNewsArticles(newsJSON);
         })
 
 }
 
-function renderNewsCard(articles_json){
+// This function will take in the JSON response from Bing News API and create HTML elements.
+// The JSON response object contains an array of Articles in the '.value' key of the response.
+// This method will iterate through each article located within the '.value' mapping and create
+// a little "News Card Infographic" for each article.
+function renderNewsArticles(articles_json){
     let article_container = document.getElementById("articles-container");
     // Will clear previous news cards... maybe set up conditional
     // to not do this if cards are from the same address.
