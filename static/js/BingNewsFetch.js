@@ -40,19 +40,16 @@ function renderNewsCard(articles_json){
             let article_img = article.image.contentUrl;
             let date_published = article.datePublished;
             let description = article.description;
-            // let article = article;
-            // let id = i;
     
             // https://stackoverflow.com/questions/5536596/dynamically-creating-html-elements-using-javascript
             let line_break = document.createElement("br");
-            let parent_div_direct_children_tree = document.createDocumentFragment();
-            // Parent/Outermost Div:
-            let parent_div = document.createElement("div");
-            parent_div.setAttribute("id", i);
-            parent_div.setAttribute("class", "NewsCard");
+            let Article_Card_Direct_Children_Elements = document.createDocumentFragment();
+            let Article_Card_Div = document.createElement("div");
+            Article_Card_Div.setAttribute("id", i);
+            Article_Card_Div.setAttribute("class", "NewsCard");
             
-                let header_tree = document.createDocumentFragment();
                 // Header tag for Card.
+                let header_tree = document.createDocumentFragment();
                 let card_header = document.createElement("header");
                 card_header.setAttribute("class", "card-header");
     
@@ -77,16 +74,14 @@ function renderNewsCard(articles_json){
                 header_tree.append(source_provider_logo, article_provider, link);
                 card_header.appendChild(header_tree);
     
-                parent_div_direct_children_tree.appendChild(card_header);
+                Article_Card_Direct_Children_Elements.appendChild(card_header);
     
-                if (article_img) {
-                    //Article Image if available
-                    let article_image = document.createElement("img");
-                    article_image.setAttribute("src", article_img);
-                    article_image.setAttribute("class", "article-img");
-                    parent_div_direct_children_tree.appendChild(article_image);
-                }
-                parent_div_direct_children_tree.appendChild(line_break);
+                let article_image = document.createElement("img");
+                article_image.setAttribute("src", article_img);
+                article_image.setAttribute("class", "article-img");
+                Article_Card_Direct_Children_Elements.appendChild(article_image);
+
+                Article_Card_Direct_Children_Elements.appendChild(line_break);
                 
                 let img_caption_div = document.createElement("div");
                 // not sure why i called it img_caption... look at old code.
@@ -96,7 +91,7 @@ function renderNewsCard(articles_json){
                     published_time.appendChild(document.createTextNode("Published " + date_published));
                 img_caption_div.appendChild(published_time);
     
-                parent_div_direct_children_tree.appendChild(img_caption_div);
+                Article_Card_Direct_Children_Elements.appendChild(img_caption_div);
                 
                 let card_body_children_tree = document.createDocumentFragment();
                 let card_body_div = document.createElement("div");
@@ -111,11 +106,10 @@ function renderNewsCard(articles_json){
                     card_body_children_tree.append(article_title_tag, article_desc_tag, line_break);
                 card_body_div.appendChild(card_body_children_tree);
     
-                parent_div_direct_children_tree.appendChild(card_body_div);
+                Article_Card_Direct_Children_Elements.appendChild(card_body_div);
                 // At the very end....
-                parent_div.appendChild(parent_div_direct_children_tree);
-                console.log("ayo wtf -->\n" + parent_div)
-                document.getElementById("articles-container").appendChild(parent_div);
+                Article_Card_Div.appendChild(Article_Card_Direct_Children_Elements);
+                document.getElementById("articles-container").appendChild(Article_Card_Div);
         }
     })
 }
