@@ -17,7 +17,7 @@ def signup(request):
             except User.DoesNotExist:
                 user = User.objects.create_user(request.POST['username'],password = request.POST['password'])
                 auth.login(request,user)
-                return redirect('homepage')
+                return redirect('homepage') #Redirect user to homepage after successfully creatin account
         else:
             return render(request, 'accounts/signup.html', {'error':'Passwords must match' })
     else:
@@ -25,8 +25,18 @@ def signup(request):
         return render(request, 'accounts/signup.html')
 
 def login(request):
-    return render(request, 'accounts/login.html')
+    if request.method == 'POST':    #User is trying to submit log in information
+        user = auth.authenticate(username=request.POST['username'],password=request.POST['password'])
+        if user is not None:
+            auth.login(request,user)
+            return render(request, 'homepage.html')
+        else:
+            return render(request, 'accounts/login.html', {'error': 'username or password is incorrect'}) #generic error message better for security 
+    else:   #User is trying to access the log in page
+        return render(request, 'accounts/login.html')
 
-#Still needs logout functionality
+
 def logout(request):
-    return render(request, 'homepage.html')
+    if request.method == 'POST':
+        auth.logout(request)
+        return render(request, 'homepage.html')
