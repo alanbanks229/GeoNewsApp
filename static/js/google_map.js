@@ -37,7 +37,7 @@ window.initMap = function() {
 function geocodeAddress(geocoder, googleMaps) {
 
     // acquiring "text" value of whatever we inputted in the input field.
-    const address = document.getElementById("address").value;
+    const address = document.getElementById("target_address").value;
     geocoder.geocode({ address: address }, (results, status) => {
 
       // If status is OK... pinpoint marker location and add to User Array.
