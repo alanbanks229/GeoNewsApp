@@ -1,0 +1,75 @@
+
+Old signin.html
+<h1>signup</h1>
+
+{% if error  %}
+{{ error }}
+<br/><br/>
+{% endif %}
+
+<form method="POST" action="{% url 'signup' %}">
+    {% csrf_token %} <!--I don't know what this is, but I think its for security practices =From Jordan= -->
+
+    Username:
+    <br/>
+    <input type"text" name="username"/>
+
+    <br/><br/>
+
+    Password:
+    <br/>
+    <input type="password" name="password"/>
+
+    <br/><br/>
+
+    Confirm Password:
+    <br/>
+    <input type="password" name="confpassword"/>
+    <br/><br/>
+
+    <input  type="submit" value="Sign Up!"/>
+</form>
+
+
+Old login.html<h1>Log In</h1>
+
+{% if error  %}
+{{ error }}
+<br/><br/>
+{% endif %}
+
+<form method="POST" action="{% url 'login' %}">
+    {% csrf_token %} <!--I don't know what this is, but I think its for security practices =From Jordan= -->
+
+    Username:
+    <br/>
+    <input type="text" name="username"/>
+
+    <br/><br/>
+
+    Password:
+    <br/>
+    <input type="password" name="password"/>
+
+    <br/><br/>
+
+    <input  type="submit" value="Log in"/>
+</form>
+
+<!--This section is simply to test logout functionality.-->
+<!--Ideally these will be implemented in a navbar-->
+<br/><br/>
+
+{% if user.is_authenticated %}
+logged in as {{ user.username }}
+<br/>
+<a name="logoutbtn" href="javascript:{document.getElementById('logout').submit()}" onclick="">Log out</a>
+<form id="logout" method ="POST" action="{% url 'logout' %}">
+    {% csrf_token %}
+    <input type="hidden">
+</form>
+
+{% else %}
+<a name="loginbtn" href="{% url 'login' %}">Log in</a>
+<a name="singupbtn" href="{% url 'signup' %}">Sign up</a>
+{% endif %}

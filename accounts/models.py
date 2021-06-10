@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.db.models.fields.related import OneToOneField
+from django.db.models.fields import CharField
+from django.db.models.fields.related import ForeignKey, OneToOneField
+
+from GeoNewsApp import settings
 
 # Create your models here.
 
@@ -79,6 +82,7 @@ class User(AbstractBaseUser):
     def is_active(self):
         return self.active
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    #extend user
+
+class Marker(models.Model):
+    user = ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    address = CharField
