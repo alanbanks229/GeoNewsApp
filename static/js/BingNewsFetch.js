@@ -1,8 +1,5 @@
 import {Bing_API_Key} from './api_keys.js'
 
-// will hold the current state of API fetch call that was returned.
-let articles_json;
-
 const requestHeaders = {
     headers: {
         'Ocp-Apim-Subscription-Key': Bing_API_Key,
@@ -20,7 +17,6 @@ function fetchNews(formatted_address){
         .then((response) => response.json())
         .then((newsJSON) => {
             console.log(newsJSON)
-            articles_json = newsJSON;
             renderNewsArticles(newsJSON);
         })
 
