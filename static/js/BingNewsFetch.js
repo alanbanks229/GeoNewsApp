@@ -18,6 +18,8 @@ function fetchNews(formatted_address){
         .then((newsJSON) => {
             console.log(newsJSON)
             renderNewsArticles(newsJSON);
+            // Testing Jordan's query regarding `pulling code from master to current branch one is working on`
+            console.log("Hello")
         })
 
 }
