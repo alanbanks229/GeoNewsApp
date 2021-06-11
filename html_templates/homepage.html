@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoNews Web Application</title>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/articles.css' %}">
     <script type="module" src="{% static 'js/google_map.js' %}"></script>
 </head>
 <body>
@@ -15,16 +16,20 @@
         <br/>
         <a href="count_homepage/">Count Home Page (html way) </a>
     </p>
-    <div class="align-center">
-        <h1>GeoNews</h1>
+    <div class="map-container">
+        <h1 id="GeoNews-Title">GeoNews</h1>
         <p>Get the news just by clicking :D</p>
         <!-- Text Input Field -->
         <div id="location-panel">
-            <label>
-                City, State: 
-            </label>
-            <input id="address" type="textbox" value="Washington, D.C." />
-            <input id="submit" type="button" value="locate" />
+            <form action="{% url 'homepage' %}" method="POST">
+                <!-- Django requires csrf_token in form for security purposes -->
+                {% csrf_token %}
+                <label for="address">
+                    City, State: 
+                </label>
+                <input name="address" id="target_address" type="textbox" value="Washington, D.C." />
+                <input id="submit" type="submit" value="locate" />
+            </form>
         </div>
         
         <!-- Reserved id 'map' for google map to appear-->
@@ -34,6 +39,11 @@
             <input id="showMarkers" type="button" value="Show All Markers" />
             <input id="deleteMarkers" type="button" value="Delete Markers" />
         </div>
+
+    </div>
+    <div id="articles-container">
+        <!-- News Cards will get rendered in here -->
+    </div>
     </div>
 
     <!--DO NOT MOVE THIS SCRIPT TAG ... IT NEEDS TO LOAD LAST-->

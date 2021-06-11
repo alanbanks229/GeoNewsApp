@@ -1,3 +1,5 @@
+import pdb
+
 from django.http import HttpResponse
 
 # this will render our custom templates inside "../html_templates"
@@ -5,6 +7,12 @@ from django.shortcuts import render
 
 # main site homepage... with google map
 def homepage(request):
+    if (request.POST):
+        # Jordan, request.POST will contain a dictionary containing a key 'address'
+        # With the value of whatever the input field was.
+        print(request.POST)
+        # pdb.set_trace()
+        # return
     return render(request, 'homepage.html')
 
 # Django tutorial Count Homepage.
