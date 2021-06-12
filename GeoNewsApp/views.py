@@ -1,15 +1,21 @@
 import pdb
-
+from accounts.models import Marker
 from django.http import HttpResponse
+from django.contrib import auth
 
 # this will render our custom templates inside "../html_templates"
 from django.shortcuts import render
 
 # main site homepage... with google map
 def homepage(request):
-    if (request.POST):
+    if request.method == 'POST':
         # Jordan, request.POST will contain a dictionary containing a key 'address'
         # With the value of whatever the input field was.
+        target_address = request.POST['address']
+        newMarker = Marker(address = target_address)
+        newMarker.save()
+        request.user.markers.add(newMarker)
+
         print(request.POST)
         # pdb.set_trace()
         # return

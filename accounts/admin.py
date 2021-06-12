@@ -3,6 +3,7 @@ from django.contrib.auth import get_user_model
 from .forms import UserAdminChangeForm,UserAdminCreationForm
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
+from .models import Marker
 
 #from .models import 
 User = get_user_model()
@@ -18,11 +19,11 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ['username', 'admin']
+    list_display = ['username', 'admin', 'display_markers']
     list_filter = ['admin','staff','active']
     fieldsets = (
         (None, {'fields': ('username', 'password')}),
-        ('Personal info', {'fields': ()}),
+        ('Markers', {'fields': ('markers',)}),
         ('Permissions', {'fields': ('admin','staff', 'active')}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
@@ -43,7 +44,7 @@ class UserAdmin(BaseUserAdmin):
 
 
 admin.site.register(User,UserAdmin)
-
+admin.site.register(Marker)
 # Register your models here.
 
 
