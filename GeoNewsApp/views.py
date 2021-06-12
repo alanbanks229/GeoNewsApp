@@ -1,5 +1,5 @@
 import pdb
-from accounts.models import Marker
+from accounts.models import Marker, User
 from django.http import HttpResponse
 from django.contrib import auth
 
@@ -12,13 +12,23 @@ def homepage(request):
         # Jordan, request.POST will contain a dictionary containing a key 'address'
         # With the value of whatever the input field was.
         target_address = request.POST['address']
-        newMarker = Marker(address = target_address)
-        newMarker.save()
-        request.user.markers.add(newMarker)
+        try:
+            newMarker = Marker.objects.get(address = target_address)    #Check to see if ANY marker ANYWHERE contains the address searched by user
+            try:
+                usermarker = User.objects.get(username = request.user.username, markers = newMarker)    #Check to see if THIS particular user already has that Address in their marker list
 
-        print(request.POST)
-        # pdb.set_trace()
-        # return
+            except request.user.DoesNotExist:   #if THIS particular user does not, add that marker to their list
+                request.user.markers.add(newMarker)
+                request.user.save()
+            
+        except Marker.DoesNotExist: #If marker doesn't exist ANYWHERE create it in list of markers, and add it to THIS user's marker list
+            newMarker = Marker(address = target_address)
+            newMarker.save()
+            request.user.markers.add(newMarker)
+            request.user.save()
+
+        
+        
     return render(request, 'homepage.html')
 
 # Django tutorial Count Homepage.
