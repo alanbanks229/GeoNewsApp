@@ -1,11 +1,18 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db.models.fields import CharField
-from django.db.models.fields.related import ForeignKey, OneToOneField
+from django.db.models.fields.related import ForeignKey, ManyToManyField, OneToOneField
 
 from GeoNewsApp import settings
 
 # Create your models here.
+
+class Marker(models.Model):
+    address = models.CharField(max_length = 100)
+
+    def __str__(self):
+        return self.address
+
 
 class UserManager(BaseUserManager):
     def create_user(self,username,password=None,active=True, is_staff=False,is_admin=False,):
@@ -47,6 +54,7 @@ class User(AbstractBaseUser):
     staff = models.BooleanField(default=False)
     admin = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
+    markers = models.ManyToManyField(Marker)
 
 
     USERNAME_FIELD = 'username'
@@ -57,6 +65,8 @@ class User(AbstractBaseUser):
 
     def __str__(self):
         return self.username
+    def display_markers(self):      #the :3 specifies showing the first 3 locations the user has.
+        return ', '.join(markers.address for markers in self.markers.all()[:3])
 
     def get_full_name(self):
         return self.username
@@ -83,6 +93,3 @@ class User(AbstractBaseUser):
         return self.active
 
 
-class Marker(models.Model):
-    user = ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    address = CharField
