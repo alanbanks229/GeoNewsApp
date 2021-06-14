@@ -36,25 +36,18 @@ function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
         fetchNews(target_address)
     })
     markers.push(marker);
-    const token = document.getElementById("csrf_token").value
-    // This will need to be a database call eventually... updating a user's marker array...
-    // const request = new Request(
-    //   window.location.href,
-    //   {headers: {'X-CSRFToken': window.CSRF_TOKEN}}
-    // )
-    // debugger
-    let data = {
-      'address': address,
-      'coords': target_coordinates
-    }
-    console.log(data)
+
+    //Database call 
     fetch(window.location.href, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'X-CSRFToken': window.CSRF_TOKEN
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        'address': address,
+        'coords': target_coordinates
+      }),
     })
     .then(response => response.json())
     .then(data => {
