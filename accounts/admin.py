@@ -38,13 +38,23 @@ class UserAdmin(BaseUserAdmin):
     ordering = ['username']
     filter_horizontal = ()
 
+#@admin.register(Marker)
+class MarkerAdmin(admin.ModelAdmin):
+    list_display = ['address', 'coordinates']
+    fieldsets= (
+        (None, {'fields': ('address', 'coordinates')}),
 
+    )
+
+    search_fields = ['address']
+    ordering = ['address']
+    filter_horizontal = ()
 
 
 
 
 admin.site.register(User,UserAdmin)
-admin.site.register(Marker)
+admin.site.register(Marker,MarkerAdmin)
 # Register your models here.
 
 
