@@ -37,18 +37,19 @@ function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
     })
     markers.push(marker);
 
+    document.getElementById("target_coords").value = target_coordinates;
     //Database call 
-    fetch(window.location.href, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-CSRFToken': window.CSRF_TOKEN
-      },
-      body: JSON.stringify({
-        'address': address,
-        'coords': target_coordinates
-      }),
-    })
+    // fetch(window.location.href, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'X-CSRFToken': window.CSRF_TOKEN
+    //   },
+    //   body: JSON.stringify({
+    //     'address': address,
+    //     'coords': target_coordinates
+    //   }),
+    // })
     // .then(response => {
     //   console.log("WELLL WELLLL " + response)
     //   response.json()
@@ -56,9 +57,9 @@ function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
     // .then(data => {
     //   console.log('SUCCESS: ', data);
     // })
-    .catch((error) => {
-      console.error('Error:', error);
-    })
+    // .catch((error) => {
+    //   console.error('Error:', error);
+    // })
   }
   
   // Sets the map on all markers in the array.

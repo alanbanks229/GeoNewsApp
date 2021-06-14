@@ -8,6 +8,7 @@ from GeoNewsApp import settings
 # Create your models here.
 
 class Marker(models.Model):
+    # user = ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     address = models.CharField(max_length = 100)
     coordinates = models.TextField(null=True) # JSON_serialized (text) version of coordinates
     def get_address(self):
