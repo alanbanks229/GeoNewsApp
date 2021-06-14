@@ -9,9 +9,13 @@ from GeoNewsApp import settings
 
 class Marker(models.Model):
     address = models.CharField(max_length = 100)
-
-    def __str__(self):
+    coordinates = models.TextField(null=True) # JSON_serialized (text) version of coordinates
+    def get_address(self):
         return self.address
+
+    def get_coordinates(self):
+        return self.coordinates
+    # def validate_coordinate
 
 
 class UserManager(BaseUserManager):

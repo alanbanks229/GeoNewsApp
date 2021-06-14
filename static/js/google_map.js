@@ -27,7 +27,7 @@ window.initMap = function() {
   const geocoder = new google.maps.Geocoder();
 
   // Event Listener, when we click "submit" button we call the function geocodeAddress();
-  document.getElementById("submit").addEventListener("click", () => {
+  document.getElementById("submit").addEventListener("click", (e) => {
     geocodeAddress(geocoder, map_object);
   });
 

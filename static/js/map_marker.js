@@ -26,16 +26,43 @@ function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
     let target_address = geocodeResult[0].formatted_address;
     googleMapsObj.setCenter(target_coordinates);
 
+    let address = document.getElementById("target_address").value;
+
     const marker = new google.maps.Marker({
       position: target_coordinates,
       map: googleMapsObj,
     });
-
     marker.addListener("click", (e) => {
         fetchNews(target_address)
     })
-    // This will need to be a database call eventually... updating a user's marker array...
     markers.push(marker);
+    const token = document.getElementById("csrf_token").value
+    // This will need to be a database call eventually... updating a user's marker array...
+    // const request = new Request(
+    //   window.location.href,
+    //   {headers: {'X-CSRFToken': window.CSRF_TOKEN}}
+    // )
+    // debugger
+    let data = {
+      'address': address,
+      'coords': target_coordinates
+    }
+    console.log(data)
+    fetch(window.location.href, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRFToken': window.CSRF_TOKEN
+      },
+      body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('SUCCESS: ', data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    })
   }
   
   // Sets the map on all markers in the array.
