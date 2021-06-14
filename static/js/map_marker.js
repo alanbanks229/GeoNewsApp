@@ -49,10 +49,13 @@ function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
         'coords': target_coordinates
       }),
     })
-    .then(response => response.json())
-    .then(data => {
-      console.log('SUCCESS: ', data);
-    })
+    // .then(response => {
+    //   console.log("WELLL WELLLL " + response)
+    //   response.json()
+    // })
+    // .then(data => {
+    //   console.log('SUCCESS: ', data);
+    // })
     .catch((error) => {
       console.error('Error:', error);
     })

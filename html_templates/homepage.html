@@ -1,7 +1,7 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
+    <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,16 @@
     </p>
     <div class="map-container">
         <h1 id="GeoNews-Title">GeoNews</h1>
+        {% if user.is_authenticated %}
+            Welcome {{ user.username }}
+            Your {{ cock }} bookmarks: (below)
+            <br/>
+            {{ bookmarks }}
+            <br/>
+            ^^^
+        {% else %}
+            <a href="{% url 'signup' %}">Login</a> to save your bookmarks! 
+        {% endif %}
         <p>Get the news just by clicking :D</p>
         <!-- Text Input Field -->
         <div id="location-panel">
