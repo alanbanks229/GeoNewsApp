@@ -7,7 +7,6 @@ var script = document.createElement('script');
 script.src = "https://maps.googleapis.com/maps/api/js?key="+Google_API_Key+"&callback=initMap";
 script.async = true;
 
-
 // These variables should eventually be fetched from a database? If we're going for that functionality.
 let map_object;
 
@@ -23,12 +22,37 @@ window.initMap = function() {
     zoom: 8
   });
 
-  console.log(map_object);
+  // console.log(map_object);
   const geocoder = new google.maps.Geocoder();
 
-  // Event Listener, when we click "submit" button we call the function geocodeAddress();
-  document.getElementById("submit").addEventListener("click", () => {
-    geocodeAddress(geocoder, map_object);
+  // Event Listener, when we hover "submit" button we call the function geocodeAddress();
+  document.getElementById("submit").addEventListener("mouseover", (e) => {
+    const address = document.getElementById("target_address").value;
+    geocoder.geocode({ address: address }, (results, status) => {
+      // If status is OK... pinpoint marker location and add to User Array.
+      if (status === "OK") {
+        // googleMaps.setCenter(results[0].geometry.location);
+        // locateAndCreateMarkerEvent(googleMaps, results)
+        // map = googleMaps;
+        // debugger
+        // coord_result = results[0].geometry.location
+
+        let target_coordinates = results[0].geometry.location;
+        let target_address = results[0].formatted_address;
+        //my whack way of turning google result into JSON.
+        // var regex = /[+-]?\d+(\.\d+)?/g;
+        // var floats = target_coordinates.match(regex).map(function(v) { return parseFloat(v); });
+        
+        // let json_result = "{lat: " + floats[0] + "," + "lng: " + floats[1] + "}";
+
+        // converting target_coords_result
+        document.getElementById("target_coords").value = target_coordinates;
+
+      } else {
+
+        alert("Address Provided is not valid: " + status);
+      }
+    });
   });
 
 };
@@ -46,6 +70,7 @@ function geocodeAddress(geocoder, googleMaps) {
         locateAndCreateMarkerEvent(googleMaps, results)
 
       } else {
+
         alert("Geocode was not successful for the following reason: " + status);
       }
     });
