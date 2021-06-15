@@ -3,6 +3,7 @@ import re
 from accounts.models import Marker, User
 from django.http import HttpResponse
 from django.contrib import auth
+from django.contrib.auth.decorators import login_required
 
 # this will render our custom templates inside "../html_templates"
 from django.shortcuts import render
@@ -11,6 +12,7 @@ from django.shortcuts import render
 # User = get_user_model()
 
 # main site homepage... with google map
+@login_required(login_url='/accounts/login')
 def homepage(request):
     print("User has", Marker.objects.filter(user=request.user).count(), " bookmarks ")
     if request.method == 'POST':
