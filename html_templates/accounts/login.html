@@ -1,6 +1,18 @@
-<h1>Login</h1>
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoNews Web Application</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+  <script type="module" src="{% static 'js/google_map.js' %}"></script>
+  <!-- <script>window.CSRF_TOKEN="{{ csrf_token }}"</script> -->
+</head>
+
+<h1>GeoNews Login</h1>
     <form method='POST'> {% csrf_token %}
-      {{ form }}
+      {{ form.as_p }}
       <button type='submit' class='btn btn-default'>Submit</button>
     </form>
     {% if user.is_authenticated %}
@@ -13,6 +25,6 @@ logged in as {{ user.username }}
 </form>
 
 {% else %}
-<a name="loginbtn" href="{% url 'login' %}">Log in</a>
-<a name="singupbtn" href="{% url 'signup' %}">Sign up</a>
+<!-- Already on the login page, so this link maybe unnecessary <a name="loginbtn" href="{% url 'login' %}">Log in to your account</a><br> -->
+<a name="singupbtn" href="{% url 'signup' %}">Sign up for a new account</a>
 {% endif %}
