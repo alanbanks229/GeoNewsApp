@@ -20,7 +20,8 @@
     <div class="map-container">
         <h1 id="GeoNews-Title">GeoNews</h1>
         {% if user.is_authenticated %}
-            Welcome {{ user.username }}
+            Welcome {{ user.username }} <br>
+            <a href="{% url 'logout' %}">Log Out<a/> <br><br>
             Your bookmarks: (below)
             <br/>
             {% for obj in bookmarks %}

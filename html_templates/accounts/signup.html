@@ -1,5 +1,19 @@
-<h1>Register</h1>
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GeoNews Web Application</title>
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/articles.css' %}">
+  <script type="module" src="{% static 'js/google_map.js' %}"></script>
+  <!-- <script>window.CSRF_TOKEN="{{ csrf_token }}"</script> -->
+</head>
+
+<h1>GeoNews Account Registration</h1>
 <form method='POST'> {% csrf_token %}
-  {{ form }}
+  {{ form.as_p }}
   <button type='submit' class='btn btn-default'>Submit</button>
 </form>
+
+<a href="{% url 'login' %}">Return to login page</a>

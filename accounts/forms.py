@@ -60,12 +60,12 @@ class UserAdminChangeForm(forms.ModelForm):
    
 
 class LoginForm(forms.Form):
-    username = forms.CharField(label = 'username')
+    username = forms.CharField(label = 'Username')
     password = forms.CharField(widget= forms.PasswordInput)
 
 class RegisterForm(forms.ModelForm):         
     username = forms.CharField(widget = forms.TextInput)
-    password1 = forms.CharField(label = 'password', widget=forms.PasswordInput)
+    password1 = forms.CharField(label = 'Password', widget=forms.PasswordInput)
     password2 = forms.CharField(label='Confirm Password', widget=forms.PasswordInput)
 
     class Meta:
