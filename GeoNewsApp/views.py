@@ -4,6 +4,7 @@ from accounts.models import Marker, User
 from django.http import HttpResponse
 from django.contrib import auth
 from django.contrib.auth.decorators import login_required
+from json import dumps
 
 # this will render our custom templates inside "../html_templates"
 from django.shortcuts import render
@@ -16,13 +17,11 @@ from django.shortcuts import render
 def homepage(request):
     print("User has", Marker.objects.filter(user=request.user).count(), " bookmarks ")
     if request.method == 'POST':
-        # Jordan, request.POST will contain a dictionary containing a key 'address'
-        # With the value of whatever the input field was.
         target_address = request.POST['address']
         target_coords = request.POST['coordinates']
-        target_coords_arr = re.findall(r"[-+]?\d*\.\d+|\d+", target_coords)
-        json_result = "{lat: " + target_coords_arr[0] + "," + " lng: " + target_coords_arr[1] + "}"
-        # pdb.set_trace()
+        target_coords_arr = re.findall(r"[-+]?\d*\.\d+|\d+", target_coords)  # Regex command which will take in a target string, and return an array of the identified float values
+        pdb.set_trace()
+        json_result = "{lat: " + target_coords_arr[0] + "," + " lng: " + target_coords_arr[1] + "}"  # This value will be pushed into our Bookmarks model
         try:
             newMarker = Marker.objects.get(address = target_address)    #Check to see if ANY marker ANYWHERE contains the address searched by user
             try:
@@ -37,10 +36,23 @@ def homepage(request):
             newMarker.save()
             request.user.markers.add(newMarker)
             request.user.save()
-        pdb.set_trace()
-        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user)})
+        # pdb.set_trace()
+
+        bookmarks_data_arr = []
+        bookmarks_data = Marker.objects.filter(user=request.user)
+        for obj in bookmarks_data:
+            bookmarks_data_arr.append(obj.coordinates)
+        
+        bookmarks_data_arr = dumps(bookmarks_data_arr)
+        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr})
     else:
-        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user)})
+        bookmarks_data_arr = []
+        bookmarks_data = Marker.objects.filter(user=request.user)
+        for obj in bookmarks_data:
+            bookmarks_data_arr.append(obj.coordinates)
+        
+        bookmarks_data_arr = dumps(bookmarks_data_arr)
+        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr})
 
 # Django tutorial Count Homepage.
 def count_homepage(request):

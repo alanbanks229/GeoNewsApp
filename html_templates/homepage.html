@@ -9,7 +9,16 @@
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/articles.css' %}">
     <script type="module" src="{% static 'js/google_map.js' %}"></script>
-    <!-- <script>window.CSRF_TOKEN="{{ csrf_token }}"</script> -->
+
+    <script>
+        // coordinates is coming from views.py `coordinates = array of bookmark coordinates for user`
+        var data = JSON.parse("{{coordinates|escapejs}}");
+        var result = [];
+        for(var x in data){
+            result.push(data[x]);
+        }
+        window.USER_BOOKMARKS=result;
+    </script>
 </head>
 <body>
     <p>
@@ -18,6 +27,7 @@
         <a href="count_homepage/">Count Home Page (html way) </a>
     </p>
     <div class="map-container">
+        <h2> {{ coordinates }} </h2>
         <h1 id="GeoNews-Title">GeoNews</h1>
         {% if user.is_authenticated %}
             Welcome {{ user.username }} <br>
@@ -25,7 +35,7 @@
             Your bookmarks: (below)
             <br/>
             {% for obj in bookmarks %}
-                {{obj.address}}
+                <li class="addresses">{{obj.address}}</li>
                 <br/>
 
             {% endfor %}

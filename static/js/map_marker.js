@@ -15,8 +15,45 @@ document.getElementById("deleteMarkers").addEventListener('click', (e) => {
 // Code below is taken/inspired from:
 // https://developers.google.com/maps/documentation/javascript/examples/marker-remove#maps_marker_remove-javascript
 
-let map;
+let mapObject;
 let markers = [];
+
+function locateAndCreateAllMarkerEvents(arr_of_bookmarks_to_s){
+  // debugger
+  let last_saved_coords = window.USER_BOOKMARKS[arr_of_bookmarks_to_s.length - 1];
+  var regex = /[+-]?\d+(\.\d+)?/g;
+  var floats = last_saved_coords.match(regex).map(function(v) {return parseFloat(v); });
+
+  mapObject = new google.maps.Map(document.getElementById('map'), {
+    center: 
+    {
+      lat: floats[0],
+      lng: floats[1]
+    },
+    zoom: 8
+  })
+
+  // creating all markers
+  let counter = arr_of_bookmarks_to_s.length - 1
+  let collection_of_addresses = document.getElementsByClassName("addresses");
+  while(counter >= 0){
+    let current_coords_string = arr_of_bookmarks_to_s[counter]
+    let coords = current_coords_string.match(regex).map(function(v) {return parseFloat(v); });
+    let marker = new google.maps.Marker({
+      position: {lat: coords[0], lng: coords[1]},
+      map: mapObject
+    })
+    console.log("current counter -->", counter)
+    markers.push(marker);
+    debugger
+    let current_address = collection_of_addresses[counter].innerText
+    marker.addListener("click", (e) => {
+      fetchNews(current_address)
+    })
+    counter = counter - 1;
+  }
+
+}
 
 // Adds a marker to the map and push to the array.
 // In addition, adds an event listener for each marker to acquire news on click.
@@ -85,4 +122,4 @@ function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
     markers = [];
   }
 
-  export {locateAndCreateMarkerEvent}
+  export {locateAndCreateMarkerEvent, locateAndCreateAllMarkerEvents}

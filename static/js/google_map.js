@@ -1,4 +1,4 @@
-import { locateAndCreateMarkerEvent } from './map_marker.js';
+import { locateAndCreateAllMarkerEvents, locateAndCreateMarkerEvent } from './map_marker.js';
 import {Google_API_Key} from './api_keys.js';
 
 // Create the script tag, set the appropriate attributes
@@ -11,16 +11,33 @@ script.async = true;
 let map_object;
 
 window.initMap = function() {
-  
-  map_object = new google.maps.Map(document.getElementById('map'), {
-    // Keep in MIND:
-    // N and E coordinates are positive values
-    // W and S coordinates are negative values
+  let num_of_bookmarks = window.USER_BOOKMARKS.length
+  if (num_of_bookmarks > 0 ){
+    locateAndCreateAllMarkerEvents(window.USER_BOOKMARKS)
+    // last_saved_coords = window.USER_BOOKMARKS[num_of_bookmarks - 1];
+    // var regex = /[+-]?\d+(\.\d+)?/g;
+    // var floats = last_saved_coords.match(regex).map(function(v) {return parseFloat(v); });
 
-    // Washington, D.C. Coordinates
-    center: {lat: 38.889248, lng: -77.050636}, 
-    zoom: 8
-  });
+    // map_object = new google.maps.Map(document.getElementById('map'), {
+    //   center: 
+    //   {
+    //     lat: floats[0],
+    //     lng: floats[1]
+    //   },
+    //   zoom: 8
+    // })
+  } else {
+    map_object = new google.maps.Map(document.getElementById('map'), {
+      // Keep in MIND:
+      // N and E coordinates are positive values
+      // W and S coordinates are negative values
+  
+      // Washington, D.C. Coordinates
+      center: {lat: 38.889248, lng: -77.050636}, 
+      zoom: 8
+    });
+
+  }
 
   // console.log(map_object);
   const geocoder = new google.maps.Geocoder();
@@ -54,6 +71,9 @@ window.initMap = function() {
       }
     });
   });
+
+  // 
+  map_object
 
 };
 
