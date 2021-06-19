@@ -32,10 +32,7 @@ window.initMap = function() {
       // If status is OK... pinpoint marker location and add to User Array.
       if (status === "OK") {
          map_object.setCenter(results[0].geometry.location);
-         locateAndCreateMarkerEvent(map_object, results)
-        // map = googleMaps;
-        // debugger
-        // coord_result = results[0].geometry.location
+         locateAndCreateMarkerEvent(map_object, results);
 
         let target_coordinates = results[0].geometry.location;
         let target_address = results[0].formatted_address;
@@ -47,6 +44,7 @@ window.initMap = function() {
 
         // converting target_coords_result
         document.getElementById("target_coords").value = target_coordinates;
+        document.getElementById("target_address").value = target_address;
         
 
       } else {

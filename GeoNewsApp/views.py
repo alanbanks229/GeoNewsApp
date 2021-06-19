@@ -37,6 +37,7 @@ def homepage(request):
             newMarker.save()
             request.user.markers.add(newMarker)
             request.user.save()
+        #Instead of re Rendering the page, save the book mark, and add a html button that refreshes the page for the purpose of refreshing bookmarks.
         return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user)})
     else:
         return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user)})
