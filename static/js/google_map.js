@@ -1,4 +1,4 @@
-import { locateAndCreateAllMarkerEvents, locateAndCreateMarkerEvent } from './map_marker.js';
+import { locateAndCreateAllMarkerEvents } from './map_marker.js';
 import {Google_API_Key} from './api_keys.js';
 
 // Create the script tag, set the appropriate attributes

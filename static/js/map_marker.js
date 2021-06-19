@@ -19,7 +19,7 @@ let mapObject;
 let markers = [];
 
 function locateAndCreateAllMarkerEvents(arr_of_bookmarks_to_s){
-  // debugger
+
   let last_saved_coords = window.USER_BOOKMARKS[arr_of_bookmarks_to_s.length - 1];
   var regex = /[+-]?\d+(\.\d+)?/g;
   var floats = last_saved_coords.match(regex).map(function(v) {return parseFloat(v); });
@@ -45,7 +45,6 @@ function locateAndCreateAllMarkerEvents(arr_of_bookmarks_to_s){
     })
     console.log("current counter -->", counter)
     markers.push(marker);
-    debugger
     let current_address = collection_of_addresses[counter].innerText
     marker.addListener("click", (e) => {
       fetchNews(current_address)
@@ -55,49 +54,28 @@ function locateAndCreateAllMarkerEvents(arr_of_bookmarks_to_s){
 
 }
 
+/* DEPRECATED METHOD BELOW  */
 // Adds a marker to the map and push to the array.
 // In addition, adds an event listener for each marker to acquire news on click.
-function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
-    map = googleMapsObj;
-    let target_coordinates = geocodeResult[0].geometry.location;
-    let target_address = geocodeResult[0].formatted_address;
-    googleMapsObj.setCenter(target_coordinates);
+// function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
+//     map = googleMapsObj;
+//     let target_coordinates = geocodeResult[0].geometry.location;
+//     let target_address = geocodeResult[0].formatted_address;
+//     googleMapsObj.setCenter(target_coordinates);
 
-    let address = document.getElementById("target_address").value;
+//     let address = document.getElementById("target_address").value;
 
-    const marker = new google.maps.Marker({
-      position: target_coordinates,
-      map: googleMapsObj,
-    });
-    marker.addListener("click", (e) => {
-        fetchNews(target_address)
-    })
-    markers.push(marker);
+//     const marker = new google.maps.Marker({
+//       position: target_coordinates,
+//       map: googleMapsObj,
+//     });
+//     marker.addListener("click", (e) => {
+//         fetchNews(target_address)
+//     })
+//     markers.push(marker);
 
-    document.getElementById("target_coords").value = target_coordinates;
-    //Database call 
-    // fetch(window.location.href, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'X-CSRFToken': window.CSRF_TOKEN
-    //   },
-    //   body: JSON.stringify({
-    //     'address': address,
-    //     'coords': target_coordinates
-    //   }),
-    // })
-    // .then(response => {
-    //   console.log("WELLL WELLLL " + response)
-    //   response.json()
-    // })
-    // .then(data => {
-    //   console.log('SUCCESS: ', data);
-    // })
-    // .catch((error) => {
-    //   console.error('Error:', error);
-    // })
-  }
+//     document.getElementById("target_coords").value = target_coordinates;
+//   }
   
   // Sets the map on all markers in the array.
   function setMapOnAll(map) {
@@ -113,7 +91,7 @@ function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
   
   // Shows any markers currently in the array.
   function showMarkers() {
-    setMapOnAll(map);
+    setMapOnAll(mapObject);
   }
   
   // Deletes all markers in the array by removing references to them.
@@ -122,4 +100,4 @@ function locateAndCreateMarkerEvent(googleMapsObj, geocodeResult) {
     markers = [];
   }
 
-  export {locateAndCreateMarkerEvent, locateAndCreateAllMarkerEvents}
+  export {locateAndCreateAllMarkerEvents}
