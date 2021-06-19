@@ -31,8 +31,8 @@ window.initMap = function() {
     geocoder.geocode({ address: address }, (results, status) => {
       // If status is OK... pinpoint marker location and add to User Array.
       if (status === "OK") {
-        // googleMaps.setCenter(results[0].geometry.location);
-        // locateAndCreateMarkerEvent(googleMaps, results)
+         map_object.setCenter(results[0].geometry.location);
+         locateAndCreateMarkerEvent(map_object, results)
         // map = googleMaps;
         // debugger
         // coord_result = results[0].geometry.location
@@ -47,6 +47,7 @@ window.initMap = function() {
 
         // converting target_coords_result
         document.getElementById("target_coords").value = target_coordinates;
+        
 
       } else {
 
