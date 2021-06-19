@@ -32,7 +32,10 @@ def homepage(request):
 
         # Taking the resulting float values and pushing a map representation of coordinates to the Bookmarks model
         json_result = "{lat: " + target_coords_arr[0] + "," + " lng: " + target_coords_arr[1] + "}"
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         try:
             newMarker = Marker.objects.get(address = target_address)    #Check to see if ANY marker ANYWHERE contains the address searched by user
             try:
@@ -42,14 +45,20 @@ def homepage(request):
                 request.user.markers.add(newMarker)
                 request.user.save()
 
+
         except Marker.DoesNotExist: #If marker doesn't exist ANYWHERE create it in list of markers, and add it to THIS user's marker list
             newMarker = Marker(address = target_address, coordinates = json_result)
             newMarker.save()
             request.user.markers.add(newMarker)
             request.user.save()
+<<<<<<< HEAD
 
         bookmarks_data_arr = get_bookmark_coordinates(request.user) #calling helper method
         return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr})
+=======
+        #Instead of re Rendering the page, save the book mark, and add a html button that refreshes the page for the purpose of refreshing bookmarks.
+        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user)})
+>>>>>>> master
     else:
         bookmarks_data_arr = get_bookmark_coordinates(request.user) #calling helper method
         return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr})

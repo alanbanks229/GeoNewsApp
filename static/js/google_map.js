@@ -37,9 +37,21 @@ window.initMap = function() {
 
     geocoder.geocode({ address: address }, (results, status) => {
       if (status === "OK") {
+<<<<<<< HEAD
+=======
+         map_object.setCenter(results[0].geometry.location);
+         locateAndCreateMarkerEvent(map_object, results);
+
+>>>>>>> master
         let target_coordinates = results[0].geometry.location;
         // Adding this to a hidden element on HTML
         document.getElementById("target_coords").value = target_coordinates;
+<<<<<<< HEAD
+=======
+        document.getElementById("target_address").value = target_address;
+        
+
+>>>>>>> master
       } else {
         alert("Address Provided is not valid: " + status);
       }
