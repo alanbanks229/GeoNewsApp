@@ -39,6 +39,7 @@ body{
     text-align: center;
 }
 
+/* Delete Button */
 #deleteMarkers {
     color: red;
     font: bolder;
