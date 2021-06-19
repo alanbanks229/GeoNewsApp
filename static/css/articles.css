@@ -75,7 +75,7 @@ header {
     float: right;
 }
 img {
-    border: rgb(255, 1, 162) solid 2px;
+    /* border: rgb(255, 1, 162) solid 2px; */
 }
 .card-body h2 {
     text-align: center;
