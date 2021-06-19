@@ -8,9 +8,9 @@ document.getElementById("clearMarkers").addEventListener('click', (e) => {
 document.getElementById("showMarkers").addEventListener('click', (e) => {
     showMarkers();
 })
-document.getElementById("deleteMarkers").addEventListener('click', (e) => {
-    deleteMarkers();
-})
+// document.getElementById("deleteMarkers").addEventListener('click', (e) => {
+//     deleteMarkers();
+// })
 
 // Code below is taken/inspired from:
 // https://developers.google.com/maps/documentation/javascript/examples/marker-remove#maps_marker_remove-javascript
@@ -95,9 +95,9 @@ function locateAndCreateAllMarkerEvents(arr_of_bookmarks_to_s){
   }
   
   // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {
-    clearMarkers();
-    markers = [];
-  }
+  // function deleteMarkers() {
+  //   clearMarkers();
+  //   markers = [];
+  // }
 
   export {locateAndCreateAllMarkerEvents}

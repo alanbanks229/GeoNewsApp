@@ -9,19 +9,30 @@ from json import dumps
 # this will render our custom templates inside "../html_templates"
 from django.shortcuts import render
 
-# from django.contrib.auth import get_user_model
-# User = get_user_model()
-
 # main site homepage... with google map
 @login_required(login_url='/accounts/login')
 def homepage(request):
     print("User has", Marker.objects.filter(user=request.user).count(), " bookmarks ")
+
+    # pdb.set_trace()
+
     if request.method == 'POST':
+        
+        #basically saying if there is a parameter 'delete' in the POST request.
+        if 'delete' in request.POST:
+            bookmarks_data = Marker.objects.filter(user=request.user)
+            return render(request, 'homepage.html', {'bookmarks': None, 'coordinates': None})
+        
+        # At this point there is no delete parameter detected, program will assess what to do with bookmark information.
         target_address = request.POST['address']
         target_coords = request.POST['coordinates']
-        target_coords_arr = re.findall(r"[-+]?\d*\.\d+|\d+", target_coords)  # Regex command which will take in a target string, and return an array of the identified float values
-        pdb.set_trace()
-        json_result = "{lat: " + target_coords_arr[0] + "," + " lng: " + target_coords_arr[1] + "}"  # This value will be pushed into our Bookmarks model
+        
+        # Regex command which will take in a target string, and return an array of float values
+        target_coords_arr = re.findall(r"[-+]?\d*\.\d+|\d+", target_coords)
+
+        # Taking the resulting float values and pushing a map representation of coordinates to the Bookmarks model
+        json_result = "{lat: " + target_coords_arr[0] + "," + " lng: " + target_coords_arr[1] + "}"
+
         try:
             newMarker = Marker.objects.get(address = target_address)    #Check to see if ANY marker ANYWHERE contains the address searched by user
             try:
@@ -36,23 +47,22 @@ def homepage(request):
             newMarker.save()
             request.user.markers.add(newMarker)
             request.user.save()
-        # pdb.set_trace()
 
-        bookmarks_data_arr = []
-        bookmarks_data = Marker.objects.filter(user=request.user)
-        for obj in bookmarks_data:
-            bookmarks_data_arr.append(obj.coordinates)
-        
-        bookmarks_data_arr = dumps(bookmarks_data_arr)
+        bookmarks_data_arr = get_bookmark_coordinates(request.user) #calling helper method
         return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr})
     else:
-        bookmarks_data_arr = []
-        bookmarks_data = Marker.objects.filter(user=request.user)
-        for obj in bookmarks_data:
-            bookmarks_data_arr.append(obj.coordinates)
-        
-        bookmarks_data_arr = dumps(bookmarks_data_arr)
+        bookmarks_data_arr = get_bookmark_coordinates(request.user) #calling helper method
         return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr})
+
+# helper method to return json bookmark coordinates array
+def get_bookmark_coordinates(current_user):
+    bookmarks_data_arr = []
+    bookmarks_data = Marker.objects.filter(user=current_user)
+    for obj in bookmarks_data:
+        bookmarks_data_arr.append(obj.coordinates)
+    bookmarks_data_arr = dumps(bookmarks_data_arr)
+    return bookmarks_data_arr 
+
 
 # Django tutorial Count Homepage.
 def count_homepage(request):

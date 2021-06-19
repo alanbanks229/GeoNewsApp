@@ -11,13 +11,18 @@
     <script type="module" src="{% static 'js/google_map.js' %}"></script>
 
     <script>
-        // coordinates is coming from views.py `coordinates = array of bookmark coordinates for user`
-        var data = JSON.parse("{{coordinates|escapejs}}");
-        var result = [];
-        for(var x in data){
-            result.push(data[x]);
+                                                        // the coordinates variable comes from views.py 
+        let bookmarks_json = "{{coordinates|escapejs}}" // coordinates = array of bookmark coordinates for user
+        if (bookmarks_json == "None"){
+            window.USER_BOOKMARKS = [];
+        } else {
+            var data = JSON.parse("{{coordinates|escapejs}}");
+            var result = [];
+            for(var x in data){
+                result.push(data[x]);
+            }
+            window.USER_BOOKMARKS=result;
         }
-        window.USER_BOOKMARKS=result;
     </script>
 </head>
 <body>
@@ -27,7 +32,8 @@
         <a href="count_homepage/">Count Home Page (html way) </a>
     </p>
     <div class="map-container">
-        <h2> {{ coordinates }} </h2>
+        <!-- Debug below to see all coordinates returned from Python backend -->
+        <!-- <h2> {{ coordinates }} </h2> -->
         <h1 id="GeoNews-Title">GeoNews</h1>
         {% if user.is_authenticated %}
             Welcome {{ user.username }} <br>
@@ -52,8 +58,8 @@
                 {% csrf_token %}
                 <label for="address">City, State: </label>
                 <input id="target_address" name="address" type="textbox" value="" />
-                <label for="coordinates">Coords:</label>
-                <input id="target_coords" name="coordinates" type="textbox"/>
+                <label for="coordinates" hidden>Coords:</label>
+                <input id="target_coords" name="coordinates" type="textbox" hidden/>
                 <input id="submit" type="submit" value="locate" />
             </form>
         </div>
@@ -63,7 +69,11 @@
         <div id="floating-panel">
             <input id="clearMarkers" type="button" value="Hide Markers" />
             <input id="showMarkers" type="button" value="Show All Markers" />
-            <input id="deleteMarkers" type="button" value="Delete Markers" />
+            <!-- Django button responsible for deleting all bookmarks associated to user -->
+            <form action="{% url 'homepage' %}" method="POST">{% csrf_token %}
+                <p>Are you sure you want to delete all your bookmarks?</p>
+                <input id="deleteMarkers" type="submit" value="Delete Markers" name="delete" />
+            </form>
         </div>
 
     </div>
