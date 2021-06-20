@@ -4,7 +4,7 @@ import {Google_API_Key} from './api_keys.js';
 // Create the script tag, set the appropriate attributes
 var script = document.createElement('script');
 
-script.src = "https://maps.googleapis.com/maps/api/js?key="+Google_API_Key+"&callback=initMap";
+script.src = "https://maps.googleapis.com/maps/api/js?key="+Google_API_Key+"&callback=initMap&libraries=places";
 script.async = true;
 
 // These variables should eventually be fetched from a database? If we're going for that functionality.
