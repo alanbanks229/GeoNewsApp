@@ -30,6 +30,7 @@ def homepage(request):
         
         # Regex command which will take in a target string, and return an array of float values
         target_coords_arr = re.findall(r"[-+]?\d*\.\d+|\d+", target_coords)
+        # pdb.set_trace()
 
         # Taking the resulting float values and pushing a map representation of coordinates to the Bookmarks model
         json_result = "{lat: " + target_coords_arr[0] + "," + " lng: " + target_coords_arr[1] + "}"

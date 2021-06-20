@@ -11,19 +11,14 @@ const requestHeaders = {
 
 
 function fetchNews(formatted_address){
-
     let target_url = 'https://api.bing.microsoft.com/v7.0/news/search?q=' + formatted_address + "&originalImg=true";
     fetch(target_url, requestHeaders)
         .then((response) => response.json())
         .then((newsJSON) => {
             console.log(newsJSON)
             renderNewsArticles(newsJSON);
-            // Testing Jordan's query regarding `pulling code from master to current branch one is working on`
-            console.log("Hello")
         })
-
 }
-
 
 // Apologies for the hard to read function... a lot of html elements are created here...
 
