@@ -42,19 +42,20 @@ window.initMap = function() {
   
   // THIS IS ESSENTIALLY A PRE-CHECK TO SEE IF THE PROVIDED ADDRESS
   // CAN PROPERLY BE APPLIED TO THE GOOGLE MAPS API, and create a marker.
-  // document.getElementById("submit").addEventListener("mouseover", (e) => {
-  //   const address = document.getElementById("target_address").value;
+  document.getElementById("pseudo_submit").addEventListener("click", (e) => {
+    const address = document.getElementById("target_address").value;
 
-  //   geocoder.geocode({ address: address }, (results, status) => {
-  //     if (status === "OK") {
-  //       let target_coordinates = results[0].geometry.location;
-  //       // Adding this to a hidden element on HTML
-  //       document.getElementById("target_coords").value = target_coordinates;
-  //     } else {
-  //       alert("Address Provided is not valid: " + status);
-  //     }
-  //   });
-  // });
+    geocoder.geocode({ address: address }, (results, status) => {
+      if (status === "OK") {
+        let target_coordinates = results[0].geometry.location;
+        // Adding this to a hidden element on HTML
+        document.getElementById("target_coords").value = target_coordinates;
+        document.getElementById("address_form").submit();
+      } else {
+        alert("Address Provided is not valid: " + status);
+      }
+    });
+  });
 
   // Prevents a user to submit the form accidently while clicking enter when
   // choosing a auto-filled address.
@@ -96,25 +97,18 @@ function setup_autocomplete(){
     infowindow.close();
     // marker.setVisible(false);
     let place = autocomplete.getPlace();
-    debugger
     if (!place.geometry || !place.geometry.location) {
       // User entered the name of a Place that was not suggested and
       // pressed the Enter key, or the Place Details request failed.
       window.alert("No details available for input: '" + place.name + "'");
       return;
-    } else {
-      let address = document.getElementById("target_address").value;
-      // geocoder.geocode({ address: address }, (results, status) => {
-      //   if (status === "OK") {
-      //     let target_coordinates = results[0].geometry.location;
-      //     // Adding this to a hidden element on HTML
-      document.getElementById("target_coords").value = place.geometry.location;
-        // } else {
-        //   // This should not hit... because we checked this in the first IF conditional here? --Alan
-        //   alert("Unable to geolocate the provided address" + status);
-        // }
-      // });
     }
+    infowindowContent.children["place-name"].textContent = place.name;
+    infowindowContent.children["place-address"].textContent = place.formatted_address;
+    infowindow.open(map_object, marker);
+    
+    // We could potentially use the below later if we want to add a function where a user
+    // can click on their bookmarks and the maps object will redirect the user to that marker.
     
     //**** */ If the place has a geometry, then present it on a map.
     // if (place.geometry.viewport) {
@@ -125,9 +119,6 @@ function setup_autocomplete(){
     // }
     // marker.setPosition(place.geometry.location);
     // marker.setVisible(true);
-    infowindowContent.children["place-name"].textContent = place.name;
-    infowindowContent.children["place-address"].textContent = place.formatted_address;
-    infowindow.open(map_object, marker);
   });
 }
 
