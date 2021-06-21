@@ -15,11 +15,11 @@ document.getElementById("showMarkers").addEventListener('click', (e) => {
 // Code below is taken/inspired from:
 // https://developers.google.com/maps/documentation/javascript/examples/marker-remove#maps_marker_remove-javascript
 
-// let mapObject;
+let map_object;
 let markers = [];
 
 function locateAndCreateAllMarkerEvents(arr_of_bookmarks_to_s, mapObject, float_regex){
-
+  map_object = mapObject;
   // creating all markers
   let counter = arr_of_bookmarks_to_s.length - 1
   let collection_of_addresses = document.getElementsByClassName("addresses");
@@ -78,7 +78,7 @@ function locateAndCreateAllMarkerEvents(arr_of_bookmarks_to_s, mapObject, float_
   
   // Shows any markers currently in the array.
   function showMarkers() {
-    setMapOnAll(mapObject);
+    setMapOnAll(map_object);
   }
   
   // Deletes all markers in the array by removing references to them.
