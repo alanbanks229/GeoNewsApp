@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
+from django.contrib.auth.hashers import check_password
 
 User = get_user_model()
 
@@ -61,7 +62,21 @@ class UserAdminChangeForm(forms.ModelForm):
 
 class LoginForm(forms.Form):
     username = forms.CharField(label = 'Username')
-    password = forms.CharField(widget= forms.PasswordInput)
+    password = forms.CharField(label = 'Password', widget= forms.PasswordInput)
+
+    def clean(self):
+       
+        cleaned_data = super().clean()
+        username = self.cleaned_data.get("username")
+        password = self.cleaned_data.get("password")
+        qs = User.objects.get(username= username)
+        
+        if not qs.check_password(password):
+           raise forms.ValidationError("Invalid Login")
+        return cleaned_data
+    
+    
+        
 
 class RegisterForm(forms.ModelForm):         
     username = forms.CharField(widget = forms.TextInput)
@@ -77,7 +92,7 @@ class RegisterForm(forms.ModelForm):
         Verify username is available.
         '''
         username = self.cleaned_data.get('username')
-        qs = User.objects.filter(username= username)
+        qs = User.objects.get(username= username)
         if qs.exists():
             raise forms.ValidationError("username is taken")
         return username
