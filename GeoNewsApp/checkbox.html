@@ -1,0 +1,10 @@
+<form method="POST" action = "#">
+    <ul>
+        {% for bookmark in coordinates %}
+            <li><input type="checkbox", value="clicked", name="c{{bookmark.id}}">{{bookmark.address}}</li>
+
+        {% endfor %}
+
+    </ul>
+    <button type="submit", name="deleteMarkers", value="delete">Delete Selected Markers</button>
+</form>

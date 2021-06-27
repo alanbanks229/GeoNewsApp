@@ -40,11 +40,15 @@
             <a href="{% url 'logout' %}">Log Out<a/> <br><br>
             Your bookmarks: (below)
             <br/>
-            {% for obj in bookmarks %}
-                <li class="addresses">{{obj.address}}</li>
-                <br/>
-
-            {% endfor %}
+            <form method="POST" action = "#">{% csrf_token %}
+                <ul>
+                    {% for obj in bookmarks %}
+                        <li class="addresses"><input type="checkbox", value="clicked", name="{{obj.id}}">{{obj.address}}</li>
+                        <br/>
+                    {% endfor %}
+                </ul><!-- Django button responsible for deleting all bookmarks associated to user -->
+                <button type="submit" value="delete" name="delete">Delete Selected Markers</button>
+            </form>
             <br/>
             ^^^
         {% else %}
@@ -75,11 +79,6 @@
         <div id="floating-panel">
             <input id="clearMarkers" type="button" value="Hide Markers" />
             <input id="showMarkers" type="button" value="Show All Markers" />
-            <!-- Django button responsible for deleting all bookmarks associated to user -->
-            <form action="{% url 'homepage' %}" method="POST">{% csrf_token %}
-                <p>Are you sure you want to delete all your bookmarks?</p>
-                <input id="deleteMarkers" type="submit" value="Delete Markers" name="delete" />
-            </form>
         </div>
 
     </div>
