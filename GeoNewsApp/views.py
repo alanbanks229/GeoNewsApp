@@ -17,13 +17,16 @@ def homepage(request):
     # pdb.set_trace()
 
     if request.method == 'POST':
-        
+        #print(request.POST)
         #basically saying if there is a parameter 'delete' in the POST request.
-        if request.POST.get('delete'):
+        if request.POST.get('delete'):  
+            for item in request.POST.keys():
+                print(item)
+
             for item in request.user.markers.all():
-                if request.POST.get( str(item.id) == "clicked"):
-                    target_marker = Marker.objects.get(id = item.id)
-                    request.user.marker_set.remove(target_marker)
+                if 'bmt' + str(item.id) in request.POST.keys():
+                    request.user.markers.remove(item)
+                
             return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': get_bookmark_coordinates(request.user)})
         
         # At this point there is no delete parameter detected, program will assess what to do with bookmark information.
