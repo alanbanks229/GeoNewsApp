@@ -69,10 +69,15 @@ class LoginForm(forms.Form):
         cleaned_data = super().clean()
         username = self.cleaned_data.get("username")
         password = self.cleaned_data.get("password")
-        qs = User.objects.get(username= username)
         
-        if not qs.check_password(password):
-           raise forms.ValidationError("Invalid Login")
+        
+        try:
+            qs = User.objects.get(username= username)
+            if not qs.check_password(password):
+                raise forms.ValidationError("Invalid Login")
+            return cleaned_data
+        except:
+            raise forms.ValidationError('Invalid Login')
         return cleaned_data
     
     
@@ -92,8 +97,8 @@ class RegisterForm(forms.ModelForm):
         Verify username is available.
         '''
         username = self.cleaned_data.get('username')
-        qs = User.objects.get(username= username)
-        if qs.exists():
+        #qs = User.objects.get(username= username)
+        if User.objects.filter(username= username).exists():
             raise forms.ValidationError("username is taken")
         return username
 
