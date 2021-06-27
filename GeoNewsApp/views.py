@@ -14,18 +14,20 @@ from django.shortcuts import render
 def homepage(request):
     print("User has", Marker.objects.filter(user=request.user).count(), " bookmarks ")
 
-    # pdb.set_trace()
+   
 
     if request.method == 'POST':
         #print(request.POST)
         #basically saying if there is a parameter 'delete' in the POST request.
         if request.POST.get('delete'):  
-            for item in request.POST.keys():
-                print(item)
+            
+            checklist = request.POST.getlist('checks')
+            for item in checklist:
+                request.user.markers.remove(item)
 
-            for item in request.user.markers.all():
+            """for item in request.user.markers.all():
                 if 'bmt' + str(item.id) in request.POST.keys():
-                    request.user.markers.remove(item)
+                    request.user.markers.remove(item)"""
                 
             return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': get_bookmark_coordinates(request.user)})
         
