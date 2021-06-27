@@ -21,7 +21,7 @@ def homepage(request):
         #basically saying if there is a parameter 'delete' in the POST request.
         if request.POST.get('delete'):  
             
-            checklist = request.POST.getlist('checks')
+            checklist = request.POST.getlist('marker_ids')
             for item in checklist:
                 request.user.markers.remove(item)
 
