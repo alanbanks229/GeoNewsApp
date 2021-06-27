@@ -19,10 +19,12 @@ def homepage(request):
     if request.method == 'POST':
         
         #basically saying if there is a parameter 'delete' in the POST request.
-        if 'delete' in request.POST:
-            Marker.objects.filter(user=request.user).delete()
-            # request.user.save()
-            return render(request, 'homepage.html', {'bookmarks': None, 'coordinates': None})
+        if request.POST.get('delete'):
+            for item in request.user.markers.all():
+                if request.POST.get( str(item.id) == "clicked"):
+                    target_marker = Marker.objects.get(id = item.id)
+                    request.user.marker_set.remove(target_marker)
+            return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': get_bookmark_coordinates(request.user)})
         
         # At this point there is no delete parameter detected, program will assess what to do with bookmark information.
         target_address = request.POST['address']
