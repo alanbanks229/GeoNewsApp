@@ -1,11 +1,44 @@
 #location-panel{
     text-align: center;
-    margin: auto;
+    /* margin: auto; */
 }
 
+#app_logo{
+    margin: auto;
+    width: 80%;
+    border: black solid 3px;
+}
+
+#Bookmarks_or_user_info{
+    display: inline-block;
+    margin-left: 25rem;
+}
+
+#header_news_icon{
+    /* background-color: red; */
+    display: inline-block;
+    margin-top: 1rem;
+    margin-left: 1.5rem;
+    margin-right: 0.5rem;
+    margin-bottom: 2.5rem;
+}
+
+#GeoNews-Title-Container{
+    display: inline-block;
+    /* position: inherit;
+    border: 3px solid red!important;
+    background-color: aqua; */
+}
 #GeoNews-Title{
-    text-align: center;
+    /* position: relative; */
+    margin-left: 1rem;
     font-size: 48px;
+}
+
+#inner_geo_news_container{
+    /* border: pink 4px solid;
+    background-color: darkgray; */
+    margin-top: 4px;
 }
 
 #GeoNews-Title + p {
@@ -18,8 +51,10 @@ body{
     /* height: 100vh; */
 }
 
-.map-container{
+.app-container{
+    margin: auto;
     border: orange solid 3px;
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.75) ;
 }
 #map {
@@ -54,21 +89,6 @@ body{
     display: inline;
 }
 
-#target_address{
-    background-color: #fff;
-    font-family: Roboto;
-    font-size: 15px;
-    font-weight: 300;
-    margin-left: 12px;
-    padding: 0 11px 0 13px;
-    text-overflow: ellipsis;
-    width: 400px;
-}
-
-#target_address:focus {
-    border-color: #4d90fe;
-}
-
 .bookmark_checkbox{
     cursor: pointer;
 }
@@ -81,3 +101,51 @@ input[name="marker_ids"] + label:hover{
     text-decoration: underline;
     cursor: pointer;
 }
+
+
+nav{
+    border-color: red solid 3 px;
+    padding: 5px;
+    background-color: bisque;
+}
+nav ul{height: 8rem; width:100%;}
+nav ul{overflow:hidden; overflow-y:scroll;}
+
+
+/* css animations for hiding bookmark forms */
+.displayForm{
+    visibility: visible;
+    animation-name: EaseIn;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+}
+
+.hideForm{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 1s linear 1000ms, opacity 300ms;
+}
+
+#semantic_header_override{
+    /* height: 5rem!important; */
+}
+
+@keyframes EaseIn {
+    from {
+      transform: rotate(0deg) scale(1) skew(0deg) translate(500px);
+    }
+    to {
+      transform: rotate(0deg) scale(1) skew(0deg) translate(0px);
+    }
+  }
+
+  /* @keyframes EaseOut {
+    from {
+      opacity: 100%;
+    }
+    to {
+      opacity: 0%;
+    }
+  } */

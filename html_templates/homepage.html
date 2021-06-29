@@ -6,6 +6,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GeoNews Web Application</title>
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css"> -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
     <link rel="stylesheet" href="{% static 'css/articles.css' %}">
     <script type="module" src="{% static 'js/google_map.js' %}"></script>
@@ -26,56 +30,97 @@
     </script>
 </head>
 <body>
-    <p>
+    <!-- <p>
         <a href="{% url 'count_homepage' %}">Count Home Page (Django way) </a>
         <br/>
         <a href="count_homepage/">Count Home Page (html way) </a>
-    </p>
-    <button id="bla">YOLO</button>
-    <button id="blabla">SWAG</button>
-    <div class="map-container">
+    </p> -->
+
+
+    <div id="app_logo">
+        <img id="header_news_icon" class="ui image" src="/static/images/news_pointer_transparent_edited.png">
+        <div id="GeoNews-Title-Container">
+            <div id="inner_geo_news_container">
+                <b class="ui header" id="GeoNews-Title">
+                    GeoNews
+                </b>
+            </div>
+        </div>
+
+        <div id="Bookmarks_or_user_info">
+
+            <div class="ui grid">
+                <div id="semantic_header_override">
+                    <!-- Image goes here -->
+                    <!-- White space -->
+                    <div class="right floated column">
+                        {% if user.is_authenticated %}
+                            <h2>
+                                Welcome {{ user.username }} <br>
+                            </h2>
+                            <a href="{% url 'logout' %}">
+                                <button class="ui negative basic button">
+                                    Log Out
+                                </button>
+                            </a>
+                            <br>
+                            <br>
+                            <b id="show_bookmark_label">Show Bookmarks</b>
+                            <input id="bookmark_checkbox_listener" type="checkbox" checked>
+                            <form id="bookmarks_form" method="POST" action = "">{% csrf_token %}
+                                <nav>
+                                    Your bookmarks: (below)
+                                    <br/>
+                                    <ul class="addresses">
+                                        {% for obj in bookmarks %}
+                                            <li>
+                                                <input type="checkbox", value="{{obj.id}}", name="marker_ids" class="bookmark_checkbox">
+                                                <label class="bookmark_label">{{obj.address}}</label>
+                                            </li>
+                                            <br/>
+                                        {% endfor %}
+                                    </ul>
+                                </nav>
+                                <!-- Django button responsible for deleting all bookmarks associated to user -->
+                                <button type="submit" value="delete" name="delete">Delete Selected Markers</button>
+                            </form>
+                            <br/>
+                            ^^^
+                        {% else %}
+                            <a href="{% url 'signup' %}">Login</a> to save your bookmarks! 
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="app-container">
         <!-- Debug below to see all coordinates returned from Python backend -->
         <!-- <h2> {{ coordinates }} </h2> -->
-        <h1 id="GeoNews-Title">GeoNews</h1>
-        {% if user.is_authenticated %}
-            Welcome {{ user.username }} <br>
-            <a href="{% url 'logout' %}">Log Out<a/> <br><br>
-            Your bookmarks: (below)
-            <br/>
-            <form method="POST" action = "">{% csrf_token %}
-                <ul class="addresses">
-                    {% for obj in bookmarks %}
-                        <li>
-                            <input type="checkbox", value="{{obj.id}}", name="marker_ids" class="bookmark_checkbox">
-                            <label class="bookmark_label">{{obj.address}}</label>
-                        </li>
-                        <br/>
-                    {% endfor %}
-                </ul><!-- Django button responsible for deleting all bookmarks associated to user -->
-                <button type="submit" value="delete" name="delete">Delete Selected Markers</button>
-            </form>
-            <br/>
-            ^^^
-        {% else %}
-            <a href="{% url 'signup' %}">Login</a> to save your bookmarks! 
-        {% endif %}
+    
         <p>Get the news just by clicking :D</p>
         <!-- Text Input Field -->
         <div id="location-panel">
             <form id="address_form" action="{% url 'homepage' %}" method="POST">
                 <!-- Django requires csrf_token in form for security purposes -->
                 {% csrf_token %}
+                <br/>
                 <label for="address">City, State: </label>
-                <input id="target_address" name="address" type="textbox" value="" autocomplete="off"/>
+                <div class="ui large icon input category search">
+                    <input class="prompt" type="text" id="target_address" name="address" autocomplete="off"/>
+                    <i class="search icon"></i>
+                </div>
+
                 <label for="coordinates" hidden>Coords:</label>
                 <input id="target_coords" name="coordinates" type="textbox" hidden/>
                 <!-- pseudo submit will serve as our submit button -->
-                <input id="pseudo_submit" type="button" value="locate"/>
+                <input class="ui blue button" id="pseudo_submit" type="button" value="Go"/>
                 <!-- <input id="submit" type="submit" hidden/> -->
             </form>
         </div>
         
         <!-- Reserved id 'map' for google map to appear-->
+        <br/>
         <div id="map"></div>
         <div id="infowindow-content">
             <span id="place-name" class="title"></span><br />
@@ -86,9 +131,9 @@
             <input id="showMarkers" type="button" value="Show All Markers" />
         </div>
 
-    </div>
-    <div id="articles-container">
-        <!-- News Cards will get rendered in here -->
+        <div id="articles-container">
+            <!-- News Cards will get rendered in here -->
+        </div>
     </div>
     </div>
 

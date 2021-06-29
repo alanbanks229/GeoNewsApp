@@ -69,17 +69,22 @@ window.initMap = function() {
     }
   })
 
-
-  // temporary button for testing Panning feature for google maps
-  document.getElementById("bla").addEventListener("click", (e) => {
-    map_object.panTo({lat: -34, lng: 151})
-    console.log("HIT")
+  let bookmark_checkbox = document.getElementById("bookmark_checkbox_listener");
+  let bookmark_form = document.getElementById("bookmarks_form");
+  bookmark_checkbox.addEventListener("change", (e) => {
+    console.log(bookmark_checkbox.checked)
+    //"this" is referring to the bookmark_checkbox html element ... not the javascript window.init
+    if (bookmark_checkbox.checked){
+      bookmark_checkbox.disabled = true;
+      setTimeout(function(){bookmark_checkbox.disabled = false;},1000);
+      document.getElementById("show_bookmark_label").innerHTML = "Hide Bookmarks"
+      bookmark_form.className = 'displayForm';
+    } else {
+      // setTimeout(function(){bookmark_checkbox.disabled = false;},1000);
+      document.getElementById("show_bookmark_label").innerHTML = "Show Bookmarks"
+      bookmark_form.className = 'hideForm';
+    }
   })
-  document.getElementById("blabla").addEventListener("click", (e) => {
-    map_object.panTo({lat: -40, lng: 120})
-    console.log("HIT")
-  })
-
 };
 
 
