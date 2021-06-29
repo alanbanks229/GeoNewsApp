@@ -31,6 +31,8 @@
         <br/>
         <a href="count_homepage/">Count Home Page (html way) </a>
     </p>
+    <button id="bla">YOLO</button>
+    <button id="blabla">SWAG</button>
     <div class="map-container">
         <!-- Debug below to see all coordinates returned from Python backend -->
         <!-- <h2> {{ coordinates }} </h2> -->
@@ -41,9 +43,12 @@
             Your bookmarks: (below)
             <br/>
             <form method="POST" action = "">{% csrf_token %}
-                <ul>
+                <ul class="addresses">
                     {% for obj in bookmarks %}
-                        <li class="addresses"><input type="checkbox", value="{{obj.id}}", name="marker_ids">{{obj.address}}</li>
+                        <li>
+                            <input type="checkbox", value="{{obj.id}}", name="marker_ids" class="bookmark_checkbox">
+                            <label class="bookmark_label">{{obj.address}}</label>
+                        </li>
                         <br/>
                     {% endfor %}
                 </ul><!-- Django button responsible for deleting all bookmarks associated to user -->

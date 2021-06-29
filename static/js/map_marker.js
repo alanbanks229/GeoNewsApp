@@ -19,22 +19,32 @@ let map_object;
 let markers = [];
 
 function locateAndCreateAllMarkerEvents(arr_of_bookmarks_to_s, mapObject, float_regex){
+  const image = {
+    url: "../static/images/news_pointer_transparent_edited.png",
+    size: new google.maps.Size(45,64),
+    origin: new google.maps.Point(0,0),
+    anchor: new google.maps.Point(22,64)
+  };
   map_object = mapObject;
   // creating all markers
   let counter = arr_of_bookmarks_to_s.length - 1
-  let collection_of_addresses = document.getElementsByClassName("addresses");
+  let collection_of_addresses = document.getElementsByClassName("bookmark_label");
   while(counter >= 0){
     let current_coords_string = arr_of_bookmarks_to_s[counter]
     let coords = current_coords_string.match(float_regex).map(function(v) {return parseFloat(v); });
     let marker = new google.maps.Marker({
       position: {lat: coords[0], lng: coords[1]},
-      map: mapObject
+      map: mapObject,
+      icon: image
     })
-    console.log("current counter -->", counter)
+    
     markers.push(marker);
     let current_address = collection_of_addresses[counter].innerText
     marker.addListener("click", (e) => {
       fetchNews(current_address)
+    })
+    collection_of_addresses[counter].addEventListener("click", (e) => {
+      map_object.panTo({lat: coords[0], lng: coords[1]})
     })
     counter = counter - 1;
   }

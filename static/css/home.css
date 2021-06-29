@@ -67,4 +67,17 @@ body{
 
 #target_address:focus {
     border-color: #4d90fe;
-  }
+}
+
+.bookmark_checkbox{
+    cursor: pointer;
+}
+
+input[name="marker_ids"] + label{
+    color: blue;
+}
+input[name="marker_ids"] + label:hover{
+    text-decoration-color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}

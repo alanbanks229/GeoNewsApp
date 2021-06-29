@@ -69,6 +69,17 @@ window.initMap = function() {
     }
   })
 
+
+  // temporary button for testing Panning feature for google maps
+  document.getElementById("bla").addEventListener("click", (e) => {
+    map_object.panTo({lat: -34, lng: 151})
+    console.log("HIT")
+  })
+  document.getElementById("blabla").addEventListener("click", (e) => {
+    map_object.panTo({lat: -40, lng: 120})
+    console.log("HIT")
+  })
+
 };
 
 
