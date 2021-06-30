@@ -3,17 +3,40 @@
     /* margin: auto; */
 }
 
-#app_logo{
+
+#App_Container{
     margin: auto;
-    width: 80%;
     border: black solid 3px;
 }
 
-#Bookmarks_or_user_info{
-    display: inline-block;
-    margin-left: 25rem;
+#Header_Container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    background-color: rgba(246, 217, 169, 0.452);
+    margin: auto;
+    width: 100%;
 }
 
+#Header_Container > div {
+    display: inline-block;
+}
+
+#container_user_welcome{
+    margin: auto!important;
+}
+
+.Bookmarks_SideBar_Hidden{
+    width: 0%;
+}
+
+#user_welcome{
+    margin-top: 5rem;
+    font-size: 22px;
+}
+
+/* Header Tag Image Icon */
 #header_news_icon{
     /* background-color: red; */
     display: inline-block;
@@ -23,12 +46,18 @@
     margin-bottom: 2.5rem;
 }
 
+/* Header Tag GeoNews */
 #GeoNews-Title-Container{
     display: inline-block;
-    /* position: inherit;
-    border: 3px solid red!important;
-    background-color: aqua; */
 }
+
+/* Header Tag Container */
+#logout_button_container{
+    width: 304px!important;
+    text-align: center;
+}
+
+/* <b> element in header tag */
 #GeoNews-Title{
     /* position: relative; */
     margin-left: 1rem;
@@ -51,11 +80,22 @@ body{
     /* height: 100vh; */
 }
 
-.app-container{
-    margin: auto;
+#map_container{
+    width: 100%;
+}
+
+#Bookmarks_SideBar{
+    width: 25%;
+}
+
+#map_and_bookmark_container{
+    /* margin: auto; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     border: orange solid 3px;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.75) ;
+    background-color: rgba(255, 255, 255, 0.75);
 }
 #map {
     height: 700px;
@@ -108,44 +148,76 @@ nav{
     padding: 5px;
     background-color: bisque;
 }
-nav ul{height: 8rem; width:100%;}
+nav ul{width:100%;}
 nav ul{overflow:hidden; overflow-y:scroll;}
 
 
 /* css animations for hiding bookmark forms */
-.displayForm{
+.sidebarVisible{
     visibility: visible;
     animation-name: EaseIn;
-    animation-duration: 1s;
+    animation-duration: 0.25s;
     animation-iteration-count: 1;
     animation-timing-function: ease;
     animation-fill-mode: forwards;
 }
 
-.hideForm{
+.sidebarHidden{
     visibility: hidden;
+    animation-name: EaseOut;
+    animation-duration: 0.25s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
     opacity: 0;
     transition: visibility 1s linear 1000ms, opacity 300ms;
 }
 
-#semantic_header_override{
-    /* height: 5rem!important; */
+.minimizeMainApp{
+    width: 75%;
+}
+
+.maxmizeMainApp{
+
 }
 
 @keyframes EaseIn {
     from {
+      float: left;
       transform: rotate(0deg) scale(1) skew(0deg) translate(500px);
     }
     to {
+      float: right;
       transform: rotate(0deg) scale(1) skew(0deg) translate(0px);
     }
   }
 
-  /* @keyframes EaseOut {
+  @keyframes EaseOut {
     from {
+      display: block;
       opacity: 100%;
     }
     to {
+      display: none;
       opacity: 0%;
     }
-  } */
+  }
+
+  .sidebarHidden{
+    height: 50%;
+    width: 0;
+    z-index: 1;
+    right: 0;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.sidebarVisible{
+    /* display: inline-block; */
+    height: 50%;
+    /* width: 250px; */
+    z-index: 1;
+    right: 0;
+    transition: 0.5s;
+    padding-top: 60px;
+}

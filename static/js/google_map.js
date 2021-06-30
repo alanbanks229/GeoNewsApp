@@ -70,7 +70,7 @@ window.initMap = function() {
   })
 
   let bookmark_checkbox = document.getElementById("bookmark_checkbox_listener");
-  let bookmark_form = document.getElementById("bookmarks_form");
+  let bookmark_form = document.getElementById("Bookmarks_SideBar");
   bookmark_checkbox.addEventListener("change", (e) => {
     console.log(bookmark_checkbox.checked)
     //"this" is referring to the bookmark_checkbox html element ... not the javascript window.init
@@ -78,13 +78,17 @@ window.initMap = function() {
       bookmark_checkbox.disabled = true;
       setTimeout(function(){bookmark_checkbox.disabled = false;},1000);
       document.getElementById("show_bookmark_label").innerHTML = "Hide Bookmarks"
-      bookmark_form.className = 'displayForm';
+      bookmark_form.className = 'sidebarVisible';
+      bookmark_form.style.display = 'block';
     } else {
       // setTimeout(function(){bookmark_checkbox.disabled = false;},1000);
       document.getElementById("show_bookmark_label").innerHTML = "Show Bookmarks"
-      bookmark_form.className = 'hideForm';
+      bookmark_form.className = 'sidebarHidden';
+      bookmark_form.style.display = 'none';
     }
   })
+
+
 };
 
 
