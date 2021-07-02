@@ -33,7 +33,7 @@ window.initMap = function() {
   
       // Washington, D.C. Coordinates
       center: {lat: 38.889248, lng: -77.050636}, 
-      zoom: 8
+      zoom: 11
     });
 
   }
@@ -64,7 +64,6 @@ window.initMap = function() {
   // Prevents a user to submit the form accidently while clicking enter when
   // choosing a auto-filled address.
   // I think this is fine from a UI standpoint lemme know your thoughts --Alan
-  // 
   let input_field = document.getElementById("target_address");
   input_field.addEventListener("keydown", (e) => {
     if (e.key === "Enter"){
@@ -145,18 +144,6 @@ function setup_autocomplete(){
     infowindowContent.children["place-address"].textContent = place.formatted_address;
     infowindow.open(map_object, marker);
     
-    // We could potentially use the below later if we want to add a function where a user
-    // can click on their bookmarks and the maps object will redirect the user to that marker.
-    
-    //**** */ If the place has a geometry, then present it on a map.
-    // if (place.geometry.viewport) {
-    //   map_object.fitBounds(place.geometry.viewport);
-    // } else {
-    //   map_object.setCenter(place.geometry.location);
-    //   map_object.setZoom(17);
-    // }
-    // marker.setPosition(place.geometry.location);
-    // marker.setVisible(true);
   });
 }
 
@@ -173,7 +160,7 @@ function returnAndCenterMapToLatestLocation(){
       lat: floats[0],
       lng: floats[1]
     },
-    zoom: 8
+    zoom: 11
   })
   return mapObject;
 }

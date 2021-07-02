@@ -1,4 +1,5 @@
 import {Bing_API_Key} from './api_keys.js'
+// import moment from 'https://momentjs.com/downloads/moment.js'
 
 const requestHeaders = {
     headers: {
@@ -111,8 +112,11 @@ function renderNewsArticles(articles_json, address_query){
                 img_caption_div.setAttribute("class", "img-caption");
                     // <p> text representation of when Article was Published
                     let published_time = document.createElement("p");
+                    let zulu_time_str = date_published;
+                    // debugger
+                    const dateTimeAgo = moment(zulu_time_str).fromNow();
                     published_time.setAttribute("class", "published-data");
-                    published_time.appendChild(document.createTextNode("Published " + date_published));
+                    published_time.appendChild(document.createTextNode("Published " + dateTimeAgo));
                 
                 img_caption_div.appendChild(published_time);
     
@@ -154,7 +158,7 @@ function renderNewsArticles(articles_json, address_query){
         alert(
             "Bing News API, couldn't find News pertaining to\n\n\"" +
             address_query + '"\n\n' +
-            "Please try searching by City, State/Country"
+            "It might be better to search solely by the state and/or country for this location."
         )
     } else {
         const firstNewsCard = document.getElementsByClassName("NewsCard")[0];
@@ -171,5 +175,4 @@ function renderNewsArticles(articles_json, address_query){
         }
     }
 }
-
 export {fetchNews}
