@@ -93,17 +93,18 @@ window.initMap = function() {
   })
 
   let info_icon = document.getElementById('info_icon');
+  let help_container = document.getElementById("info_help_container");
+  help_container.style.display = 'none' //For some reason the space infographic takes up is showing up, removing it on render
   info_icon.addEventListener('click', (e) => {
-    let help_container = document.getElementById("info_help_container");
     info_toggle = !info_toggle;
     if (info_toggle == true){
+      help_container.className = 'infoBarVisible';
+      help_container.style.display = 'block';
+    } else {
       help_container.className = 'infoBarHidden';
       setTimeout( () => {
         help_container.style.display = 'none';
       }, 250)
-    } else {
-      help_container.style.display = 'block';
-      help_container.className = 'infoBarVisible';
   }})
 
 };

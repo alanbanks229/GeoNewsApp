@@ -252,6 +252,7 @@ nav ul{overflow:hidden; overflow-y:scroll;}
     background-color: rgba(240, 248, 255, 0.486);
     border: rgba(0, 0, 0, 0.541) solid 1px;
     border-radius: 2rem;
+    display: none;
 }
 
 .infoBarHidden{
