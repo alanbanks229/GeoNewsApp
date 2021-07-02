@@ -10,14 +10,24 @@ const requestHeaders = {
 // https://api.bing.microsoft.com/v7.0/news/search?q= {WHATEVER U QUERY}
 
 
-function fetchNews(formatted_address){
-    let target_url = 'https://api.bing.microsoft.com/v7.0/news/search?q=' + formatted_address + "&originalImg=true";
+function fetchNews(address_query){
+
+    // If the user provided something like a strict street address, re-adjust string to query "city, state, country"
+    let target_url;
+    let address_to_s_array = address_query.split(" ");
+    if (address_to_s_array.length > 3){
+        let adjusted_query = address_to_s_array.slice(Math.max(address_to_s_array.length - 3, 1)).join(' ')
+        target_url = 'https://api.bing.microsoft.com/v7.0/news/search?q=' + adjusted_query + "&originalImg=true";
+    } else {
+        target_url = 'https://api.bing.microsoft.com/v7.0/news/search?q=' + address_query + "&originalImg=true";
+    }
     fetch(target_url, requestHeaders)
         .then((response) => response.json())
         .then((newsJSON) => {
             console.log(newsJSON)
-            renderNewsArticles(newsJSON);
+            renderNewsArticles(newsJSON, address_query);
         })
+
 }
 
 // Apologies for the hard to read function... a lot of html elements are created here...
@@ -26,7 +36,8 @@ function fetchNews(formatted_address){
 // The JSON response object contains an array of Articles in the '.value' key of the response.
 // This method will iterate through each article located within the '.value' mapping and create
 // a little "News Card Infographic" for each article.
-function renderNewsArticles(articles_json){
+function renderNewsArticles(articles_json, address_query){
+    let num_of_articles = 0;
     let article_container = document.getElementById("articles-container");
     // Will clear previous news cards... maybe set up conditional
     // to not do this if cards are from the same address.
@@ -36,6 +47,7 @@ function renderNewsArticles(articles_json){
         // This is a weird conditoinal I have to do for now... some articles do not have images... so currently
         // this method will only render all the available news cards with images available.
         if (article.hasOwnProperty('image') && article.provider[0].hasOwnProperty('image')){
+            num_of_articles++;
             let source_provider_name = article.provider[0].name;
             let source_provider_img_url = article.provider[0].image.thumbnail.contentUrl;
             let article_title = article.name;
@@ -137,6 +149,14 @@ function renderNewsArticles(articles_json){
             //Repeat Process until we reach end of Articles Array.
         }
     })
+
+    if (num_of_articles == 0){
+        alert(
+            "Bing News API, couldn't find News pertaining to\n\n\"" +
+            address_query + '"\n\n' +
+            "Please try searching by City, State/Country"
+        )
+    }
 }
 
 export {fetchNews}

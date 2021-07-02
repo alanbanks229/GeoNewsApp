@@ -17,6 +17,7 @@ const float_regex = /[+-]?\d+(\.\d+)?/g;
 let autocomplete;
 
 window.initMap = function() {
+
   let num_of_bookmarks = window.USER_BOOKMARKS.length;
   if (num_of_bookmarks > 0 ){
     map_object = returnAndCenterMapToLatestLocation()
