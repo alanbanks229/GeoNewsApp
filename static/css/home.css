@@ -234,3 +234,69 @@ nav ul{overflow:hidden; overflow-y:scroll;}
     font-size: larger;
     margin-top: 4rem;
 }
+
+#info_icon{
+    color: black!important;
+}
+
+#info_icon:hover{
+    color: rgb(0, 119, 255)!important;
+}
+
+#info_help_container{
+    top: 8.5rem;
+    left: 1rem;
+    width: fit-content;
+    margin: auto;
+    padding: 1.5rem;
+    background-color: rgba(240, 248, 255, 0.486);
+    border: rgba(0, 0, 0, 0.541) solid 1px;
+    border-radius: 2rem;
+}
+
+.infoBarHidden{
+    visibility: hidden;
+    animation-name: InfoEaseOut;
+    animation-duration: 0.25s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    opacity: 0;
+}
+
+.infoBarVisible{
+    visibility: visible;
+    animation-name: InfoEaseIn;
+    animation-duration: 0.25s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+    animation-fill-mode: forwards;
+    opacity: 1;
+}
+
+
+@keyframes InfoEaseIn {
+    from {
+        display: block;
+        transform: scale(0);
+        opacity: 0%;
+    }
+    to {
+        display: block;
+        transform: scale(1);
+        opacity: 100%;
+    }
+  }
+
+  @keyframes InfoEaseOut {
+    from {
+      visibility: visible;
+      transform: scale(1);
+      opacity: 100%;
+    }
+    to {
+      /* visibility:hidden; */
+      transform: scale(0);
+      opacity: 0%;
+    }
+  }

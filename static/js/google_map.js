@@ -16,6 +16,9 @@ const float_regex = /[+-]?\d+(\.\d+)?/g;
 // GooglePlacesObject
 let autocomplete;
 
+// Info/Question Icon Toggle
+let info_toggle = false;
+
 window.initMap = function() {
 
   let num_of_bookmarks = window.USER_BOOKMARKS.length;
@@ -89,6 +92,19 @@ window.initMap = function() {
     }
   })
 
+  let info_icon = document.getElementById('info_icon');
+  info_icon.addEventListener('click', (e) => {
+    let help_container = document.getElementById("info_help_container");
+    info_toggle = !info_toggle;
+    if (info_toggle == true){
+      help_container.className = 'infoBarHidden';
+      setTimeout( () => {
+        help_container.style.display = 'none';
+      }, 250)
+    } else {
+      help_container.style.display = 'block';
+      help_container.className = 'infoBarVisible';
+  }})
 
 };
 

@@ -83,25 +83,31 @@
                     <div id="location-panel">
                         {% if bookmarks.count > 0 %}
                             <br/>
-                            <p class="bookmarks_present_info">Click any News Markers on the Map to Render News around that area!</p>
+                            <p class="bookmarks_present_info">
+                                Click any News Markers on the Map to Render News around that area!
+                                <i id="info_icon" class="question circle outline icon"></i>
+                            </p>
                         {% else %}
                             <br/>
-                            <p class="no_bookmarks_info">You have no Bookmarks yet. Please Input a location below to create one.</p>
+                            <p class="no_bookmarks_info">
+                                You have no Bookmarks yet. Please Input a location below to create one.
+                                <i id="info_icon" class="question circle outline icon"></i>
+                            </p>
                         {% endif %}
                         <form id="address_form" action="{% url 'homepage' %}" method="POST">
                             <!-- Django requires csrf_token in form for security purposes -->
                             {% csrf_token %}
-                            <br/>
-                            <label for="address">City, State: </label>
+                            <div id="info_help_container" class="infoBarHidden">
+                                <b style="color: red;">For best results please provide a search query with the following format:</b><br/><br/>
+                                <label for="address"><b>City, State, Country<br/> or <br/> City, Country</b></label><br/>
+                            </div>
                             <div class="ui large icon input category search">
                                 <input class="prompt" type="text" id="target_address" name="address" autocomplete="off"/>
-                                <i class="search icon"></i>
                             </div>
-            
-                            <label for="coordinates" hidden>Coords:</label>
-                            <input id="target_coords" name="coordinates" type="textbox" hidden/>
                             <!-- pseudo submit will serve as our submit button -->
                             <input class="ui blue button" id="pseudo_submit" type="button" value="Go"/>
+                            <label for="coordinates" hidden>Coords:</label>
+                            <input id="target_coords" name="coordinates" type="textbox" hidden/>
                         </form>
                     </div>
                     <br/>
@@ -119,20 +125,9 @@
                 <div id="Bookmarks_SideBar" class="sidebarHidden" style="display: none;">
                     <div class="ui grid">
                         <div id="semantic_header_override">
-                            <!-- Image goes here -->
-                            <!-- White space -->
+
                             <div>
                                 {% if user.is_authenticated %}
-                                    <!-- <h2>
-                                        Welcome {{ user.username }} <br>
-                                    </h2>
-                                    <a href="{% url 'logout' %}">
-                                        <button class="ui negative basic button">
-                                            Log Out
-                                        </button>
-                                    </a>
-                                    <br>
-                                    <br> -->
                                     <form id="bookmarks_form" method="POST" action = "">{% csrf_token %}
                                         <nav>
                                             Your bookmarks: (below)
