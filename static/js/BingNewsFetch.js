@@ -156,6 +156,19 @@ function renderNewsArticles(articles_json, address_query){
             address_query + '"\n\n' +
             "Please try searching by City, State/Country"
         )
+    } else {
+        const firstNewsCard = document.getElementsByClassName("NewsCard")[0];
+        // For Chrome and FireFox
+        if((navigator.userAgent.indexOf("Chrome") != -1 ) || (navigator.userAgent.indexOf("Firefox") != -1 )){
+            const y = firstNewsCard.getBoundingClientRect().top + window.scrollY;
+            window.scroll({
+                top: y,
+                behavior: 'smooth'
+            })
+        } else {
+            // For IE, Edge and Safari
+            firstNewsCard.scrollIntoView();
+        }
     }
 }
 
