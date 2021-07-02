@@ -54,7 +54,7 @@
                         Welcome {{ user.username }}<br>
                     </b>
                     <b id="show_bookmark_label">Show Bookmarks</b>
-                    <input id="bookmark_checkbox_listener" type="checkbox" checked>
+                    <input id="bookmark_checkbox_listener" type="checkbox">
                     {% else %}
                         <p>Welcome sign up for a new account </p><a href="{% url 'signup' %}">here</a> 
                     {% endif %}
@@ -72,7 +72,7 @@
                 </div>
             </div>
             <div id="map_and_bookmark_container">
-                <!-- Debug below to see all coordinates returned from Python backend -->
+                
                 <!-- <h2> {{ coordinates }} </h2> -->
                 <!-- Text Input Field -->
                 
@@ -81,6 +81,13 @@
 
                 <div id="map_container">
                     <div id="location-panel">
+                        {% if bookmarks.count > 0 %}
+                            <br/>
+                            <p class="bookmarks_present_info">Click any News Markers on the Map to Render News around that area!</p>
+                        {% else %}
+                            <br/>
+                            <p class="no_bookmarks_info">You have no Bookmarks yet. Please Input a location below to create one.</p>
+                        {% endif %}
                         <form id="address_form" action="{% url 'homepage' %}" method="POST">
                             <!-- Django requires csrf_token in form for security purposes -->
                             {% csrf_token %}
@@ -109,7 +116,7 @@
                     </div>
                 </div>
                 <!-- Bookmarks SideBar -->
-                <div id="Bookmarks_SideBar">
+                <div id="Bookmarks_SideBar" class="sidebarHidden" style="display: none;">
                     <div class="ui grid">
                         <div id="semantic_header_override">
                             <!-- Image goes here -->
@@ -137,6 +144,9 @@
                                                         <label class="bookmark_label">{{obj.address}}</label>
                                                     </li>
                                                     <br/>
+
+                                                {% empty %}
+                                                    <p>There's nothing here!</p>
                                                 {% endfor %}
                                             </ul>
                                         </nav>
