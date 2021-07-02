@@ -148,7 +148,7 @@ nav{
     padding: 5px;
     background-color: bisque;
 }
-nav ul{width:100%;}
+nav ul{height: 10rem; width:100%;}
 nav ul{overflow:hidden; overflow-y:scroll;}
 
 
@@ -220,4 +220,17 @@ nav ul{overflow:hidden; overflow-y:scroll;}
     right: 0;
     transition: 0.5s;
     padding-top: 60px;
+}
+
+.no_bookmarks_info{
+    color: red;
+    font-size: larger;
+    margin-top: 2rem;
+}
+
+.bookmarks_present_info{
+
+    color: green;
+    font-size: larger;
+    margin-top: 4rem;
 }
