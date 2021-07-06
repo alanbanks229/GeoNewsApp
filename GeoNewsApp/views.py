@@ -1,3 +1,5 @@
+# import base64 -- commenting out. was used earlier for experimentation.
+import os
 import pdb
 import re
 from accounts.models import Marker, User
@@ -12,9 +14,25 @@ from django.shortcuts import render
 # main site homepage... with google map
 @login_required(login_url='/accounts/login')
 def homepage(request):
-    print("User has", Marker.objects.filter(user=request.user).count(), " bookmarks ")
-
-   
+    
+    # From hosting server, export the API keys as environ variables, like this:
+    # export GOOGLE_API_KEY = <googlemapkey>
+    # export BING_API_KEY = <bingkey>
+    if not os.environ.get("GOOGLE_API_KEY"):
+        raise RuntimeError("GOOGLE_API_KEY not set\nFrom CLI: \n$ export GOOGLE_API_KEY = <googlemapkey>")
+        
+    if not os.environ.get("BING_API_KEY"):
+        raise RuntimeError("BING_API_KEY not set\nFrom CLI: \n$ export BING_API_KEY = <bingkey>")
+        
+    # For reference, the base64 actions are left but commented out.  Base64 doesn't add any real value in additional obfuscation.
+    GMAPKEY = os.environ.get("GOOGLE_API_KEY")
+    # encodedGMAPKEY = base64.b64encode(GMAPKEY.encode("utf-8"))
+    # encodedGMAPKEYStr = str(encodedGMAPKEY, "utf-8")
+    BNEWSKEY = os.environ.get("BING_API_KEY")
+    # encodedBNEWSKEY = base64.b64encode(BNEWSKEY.encode("utf-8"))
+    # encodedBNEWSKEYStr = str(encodedBNEWSKEY, "utf-8")    
+    
+    print("User has", Marker.objects.filter(user=request.user).count(), " bookmarks ")   
 
     if request.method == 'POST':
         #print(request.POST)
@@ -58,10 +76,10 @@ def homepage(request):
             request.user.save()
 
         bookmarks_data_arr = get_bookmark_coordinates(request.user) #calling helper method
-        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr})
+        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr, 'Google_API_Keys': GMAPKEY, 'Bing_API_Keys': BNEWSKEY})
     else:
         bookmarks_data_arr = get_bookmark_coordinates(request.user) #calling helper method
-        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr})
+        return render(request, 'homepage.html', {'bookmarks': Marker.objects.filter(user=request.user), 'coordinates': bookmarks_data_arr, 'Google_API_Keys': GMAPKEY, 'Bing_API_Keys': BNEWSKEY})
 
 # helper method to return json bookmark coordinates array
 def get_bookmark_coordinates(current_user):
