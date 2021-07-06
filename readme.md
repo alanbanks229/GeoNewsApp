@@ -30,7 +30,7 @@ Run the server... when you're in the parent directory:
 
 and then go to wherever your localhost server starts running
 
-(i.e localhost:3000 or http://127.0.0.1:3000/ etc... )
+(i.e localhost:8000 or http://127.0.0.1:8000/ etc... )
 
 Please note that this 'readme' is a quickstart.  For full instructions, see the 'Admin Guide' section of
 the full GeoNews documentation offered through CMSC_495.  That section includes additional information
