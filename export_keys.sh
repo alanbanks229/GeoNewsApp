@@ -16,3 +16,6 @@ echo $GOOGLE_KEY
 echo "Bing key set as:"
 echo $BING_KEY
 
+
+
+
