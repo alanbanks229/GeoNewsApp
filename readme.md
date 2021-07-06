@@ -17,7 +17,7 @@ OS 'env' variables.
 To simplify this, run the following script found in the top level
 GeoNewsApp folder:
 `chmod +x export_keys.sh`
-`./export_keys.sh`
+`source ./export_keys.sh`
 
 If you do not do the above steps, users will encounter a 500 error
 due to exceptions raised by 'views.py' as the API keys won't be accessible
