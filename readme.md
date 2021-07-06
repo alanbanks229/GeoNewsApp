@@ -22,7 +22,7 @@ due to exceptions raised by 'views.py' as the keys won't be accessible.
 
 Next, prepare your Django setup. You can do this with the help of 
 'requirements.txt'
-`python3 -m pip install requirements.txt`
+`python3 -m pip install -r requirements.txt`
 
 Run the server... when you're in the parent directory:
 
