@@ -25,8 +25,8 @@ a program like Notepad ++ to open the script, and look at the bottom
 right corner where you'll see an OS reference.  Change this to Unix if
 you're running this from Linux.
 Alternatively, you can manually export the keys that you see in the script:
-$ export GOOGLE_API_KEY=<add google key>
-$ export BING_API_KEY=<add bing key>
+`export GOOGLE_API_KEY=<add google key>`
+`export BING_API_KEY=<add bing key>`
 
 If you do not do the above steps, users will encounter a 500 error
 due to exceptions raised by 'views.py' as the API keys won't be accessible
