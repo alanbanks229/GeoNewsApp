@@ -33,4 +33,5 @@ and then go to wherever your localhost server starts running
 (i.e localhost:3000 or http://127.0.0.1:3000/ etc... )
 
 Please note that this 'readme' is a quickstart.  For full instructions, see the 'Admin Guide' section of
-the full GeoNews documentation offered through CMSC_495.
+the full GeoNews documentation offered through CMSC_495.  That section includes additional information
+on deploying a public facing server, as well as troubleshooting recommendations for common mistakes. 
