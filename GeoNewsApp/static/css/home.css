@@ -24,8 +24,17 @@
 }
 
 #container_user_welcome{
-    margin: auto!important;
+    margin: auto;
+    text-align: center;
 }
+
+/* #show_bookmark_label{
+     margin-top: 4rem;
+     margin-bottom: 4rem;
+} */
+/* #container_user_welcome > input {
+    margin: auto;
+} */
 
 .Bookmarks_SideBar_Hidden{
     width: 0%;
@@ -301,3 +310,17 @@ nav ul{overflow:hidden; overflow-y:scroll;}
       opacity: 0%;
     }
   }
+
+
+input[name="bookmark_checkbox_listener"] {
+
+    /* need !important to override semantic css */
+    width: 30px!important;
+    height:30px!important;
+    background:white!important;
+    border-radius:5px!important;
+    border:2px solid #555!important;
+}
+/* input[name="bookmark_checkbox_listener"]:checked {
+
+} */

@@ -62,7 +62,8 @@
                         Welcome {{ user.username }}<br>
                     </b>
                     <b id="show_bookmark_label">Show Bookmarks</b>
-                    <input id="bookmark_checkbox_listener" type="checkbox">
+                    <br/>
+                    <input name="bookmark_checkbox_listener" id="bookmark_checkbox_listener" type="checkbox">
                     {% else %}
                         <p>Welcome sign up for a new account </p><a href="{% url 'signup' %}">here</a> 
                     {% endif %}
