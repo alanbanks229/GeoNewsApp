@@ -15,14 +15,11 @@
     <script type="module" src="{% static 'js/google_map.js' %}"></script>
     <script src="https://momentjs.com/downloads/moment.js"></script>
 
-
     <script>
 
         // The API keys come from views.py
         let Bing_API_Key = "{{Bing_API_Keys}}";         
-        let Google_API_Key = "{{Google_API_Keys}}"; 
-        // console.log(Bing_API_Key);
-        // console.log(Google_API_Key);        
+        let Google_API_Key = "{{Google_API_Keys}}";                 
                                                         // the coordinates variable comes from views.py 
         let bookmarks_json = "{{coordinates|escapejs}}" // coordinates = array of bookmark coordinates for user
         if (bookmarks_json == "None"){
@@ -38,12 +35,6 @@
     </script>
 </head>
 <body>
-    <!-- <p>
-        <a href="{% url 'count_homepage' %}">Count Home Page (Django way) </a>
-        <br/>
-        <a href="count_homepage/">Count Home Page (html way) </a>
-    </p> -->
-
     <div id="App_Container">
             <div id="Header_Container">
                 <div id="logo_and_app_name">
