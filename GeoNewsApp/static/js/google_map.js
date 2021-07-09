@@ -142,12 +142,6 @@ function setup_autocomplete(){
     // invokeDebugger(autocomplete);
     // console.log("(", !place.geometry, ") &&", "(", first_closest_match.toString(), "!=", place.name.toString(), ")" );
     for(let iteration in available_matches){
-      console.log(
-        !place.geometry && 
-        (
-          available_matches[iteration].textContent.toString() != place.name.toString()
-        )
-      );
       if (available_matches[iteration].textContent.toString() == place.name.toString()){
         //user selected or typed in a valid match
         infowindowContent.children["place-name"].textContent = place.name;
@@ -184,6 +178,5 @@ function returnAndCenterMapToLatestLocation(){
   return mapObject;
 }
 document.head.appendChild(script);
-console.log("YEP")
 // Append the 'script' element to 'head'
 
