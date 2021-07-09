@@ -26,8 +26,9 @@ SECRET_KEY = 'django-insecure-^qsj(baln^ng*#hvhs%5a27i@o9kkwsok*os=y(rda$$2!c47i
 # Disable this when your website is going live.
 DEBUG = False
 
-
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', '127.0.0.1:8000']
+# The Azure host references the host name of the production build.
+# 3rd party deployers should consider putting their host information here.
+ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', 'geonews.eastus.cloudapp.azure.com']
 
 
 # Application definition
