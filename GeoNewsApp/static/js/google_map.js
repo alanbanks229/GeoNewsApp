@@ -79,15 +79,10 @@ window.initMap = function() {
         bookmark_checkbox.disabled = true;
         setTimeout(function(){bookmark_checkbox.disabled = false;},1000);
         bookmark_button_label.innerHTML = "Hide Bookmarks"
-        // bookmark_button_label.style.marginTop = "4rem";
-        // bookmark_button_label.style.marginBottom = "4rem";
         bookmark_form.className = 'sidebarVisible';
         bookmark_form.style.display = 'block';
       } else {
-        // setTimeout(function(){bookmark_checkbox.disabled = false;},1000);
         bookmark_button_label.innerHTML = "Show Bookmarks"
-        // bookmark_button_label.style.marginTop = "4rem";
-        // bookmark_button_label.style.marginBottom = "4rem";
         bookmark_form.className = 'sidebarHidden';
         bookmark_form.style.display = 'none';
       }
@@ -138,9 +133,6 @@ function setup_autocomplete(){
     // marker.setVisible(false);
     let available_matches = document.getElementsByClassName("pac-item-query") //[0].textContent;
     let place = autocomplete.getPlace();
-    // console.log("inside google_map.js debugger\n", first_closest_match, "\n=?=\n", place.name);
-    // invokeDebugger(autocomplete);
-    // console.log("(", !place.geometry, ") &&", "(", first_closest_match.toString(), "!=", place.name.toString(), ")" );
     for(let iteration in available_matches){
       if (available_matches[iteration].textContent.toString() == place.name.toString()){
         //user selected or typed in a valid match
@@ -153,9 +145,6 @@ function setup_autocomplete(){
     // User entered the name of a Place that was not suggested and
     // pressed the Enter key, or the Place Details request failed.
     window.alert("No details available for input: '" + place.name + "'");
-    // return;
-    // if ((!place.geometry) && (first_closest_match.toString() != place.name.toString())) {
-    // }
     
   });
 }
