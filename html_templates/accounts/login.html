@@ -14,11 +14,9 @@
     <form method='POST'> {% csrf_token %}
       {{ form.as_p }}
       <button type='submit' class='btn btn-default'>Submit</button>
-    </form>
-    
-      
+    </form>      
 
-    {% if user.is_authenticated %}
+{% if user.is_authenticated %}
 logged in as {{ user.username }}
 <br/>
 <a name="logoutbtn" href="javascript:{document.getElementById('logout').submit()}" onclick="">Log out</a>
@@ -26,8 +24,6 @@ logged in as {{ user.username }}
     {% csrf_token %}
     <input type="hidden">
 </form>
-
-
 
 {% else %}
 <!-- Already on the login page, so this link maybe unnecessary <a name="loginbtn" href="{% url 'login' %}">Log in to your account</a><br> -->
