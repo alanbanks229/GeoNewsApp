@@ -1,4 +1,3 @@
-# import base64 -- commenting out. was used earlier for experimentation.
 import os
 import pdb
 import re
@@ -19,18 +18,13 @@ def homepage(request):
     # export GOOGLE_API_KEY = <googlemapkey>
     # export BING_API_KEY = <bingkey>
     if not os.environ.get("GOOGLE_API_KEY"):
-        raise RuntimeError("GOOGLE_API_KEY not set\nFrom CLI: \n$ export GOOGLE_API_KEY = <googlemapkey>")
-        
+        raise RuntimeError("GOOGLE_API_KEY not set\nFrom CLI: \n$ export GOOGLE_API_KEY = <googlemapkey>")        
     if not os.environ.get("BING_API_KEY"):
         raise RuntimeError("BING_API_KEY not set\nFrom CLI: \n$ export BING_API_KEY = <bingkey>")
         
-    # For reference, the base64 actions are left but commented out.  Base64 doesn't add any real value in additional obfuscation.
-    GMAPKEY = os.environ.get("GOOGLE_API_KEY")
-    # encodedGMAPKEY = base64.b64encode(GMAPKEY.encode("utf-8"))
-    # encodedGMAPKEYStr = str(encodedGMAPKEY, "utf-8")
-    BNEWSKEY = os.environ.get("BING_API_KEY")
-    # encodedBNEWSKEY = base64.b64encode(BNEWSKEY.encode("utf-8"))
-    # encodedBNEWSKEYStr = str(encodedBNEWSKEY, "utf-8")    
+    # These keys should be set from hosting OS before running the server.
+    GMAPKEY = os.environ.get("GOOGLE_API_KEY")    
+    BNEWSKEY = os.environ.get("BING_API_KEY")       
     
     print("User has", Marker.objects.filter(user=request.user).count(), " bookmarks ")   
 
@@ -68,7 +62,6 @@ def homepage(request):
                 request.user.markers.add(newMarker)
                 request.user.save()
 
-
         except Marker.DoesNotExist: #If marker doesn't exist ANYWHERE create it in list of markers, and add it to THIS user's marker list
             newMarker = Marker(address = target_address, coordinates = json_result)
             newMarker.save()
@@ -90,34 +83,3 @@ def get_bookmark_coordinates(current_user):
     bookmarks_data_arr = dumps(bookmarks_data_arr)
     return bookmarks_data_arr 
 
-
-# Django tutorial Count Homepage.
-def count_homepage(request):
-    # return HttpResponse('Hello')
-    return render(request, 'count_homepage.html', {'greeting': "Why hello there mah dude"})
-
-
-def count(request):
-
-    user_input = request.GET['fulltext']
-
-    word_dictionary_mapping = {}
-    wordlist = user_input.split()
-
-    for word in wordlist:
-        if word in word_dictionary_mapping:
-            #Increase
-            word_dictionary_mapping[word] +=1
-        else:
-            #add to dictionary
-            word_dictionary_mapping[word] = 1
-    print(user_input)
-    return render(
-        request,
-        'count.html',
-        {
-            'user_input': user_input,
-            'count':len(wordlist),
-            'mapping':word_dictionary_mapping.items()
-        }
-    )
