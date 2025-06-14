@@ -1,3 +1,11 @@
+# GeoNewsApp - ARCHIVED
+
+---
+
+**This project is an archived senior project for a college course (CMSC 495). It is no longer actively maintained or updated.**
+
+---
+
 **Quick helpful tip, if you are creating a NEW Django project on Windows:**
 
 This command may not work on windows
